@@ -87,12 +87,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <NestedContentProject Include="Content\Content.contentproj">
-      <Project>477da77a-0381-4313-b566-61248b62f78d</Project>
-      <Visible>False</Visible>
-    </NestedContentProject>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
       <Visible>False</Visible>
       <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
