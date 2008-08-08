@@ -1,0 +1,8 @@
+*.suo
+*.xnb
+src/ThraeX/ThraeX/bin/**
+src/ThraeX/ThraeX/obj/**
+src/ThraeX/ThraeX/Content/bin/**
+src/ThraeX/ThraeX/Content/obj/**
+src/ThraeX/UnitTests/bin/**
+src/ThraeX/UnitTests/obj/**
