@@ -16,6 +16,9 @@ namespace ThraeX.Input.GameControllers
     {
         protected GamePadState previousGamePadState;
         protected GamePadState currentGamePadState;
+        protected KeyboardState currentKeyboardState;
+        protected KeyboardState previousKeyboardState;
+        protected KeyboardAssignment keyboardAssignment;
 
         public GamePadGameController()
         { }
@@ -123,7 +126,8 @@ namespace ThraeX.Input.GameControllers
 
         public void UpdateKeyboardState(KeyboardState keyboardState)
         {
-            ;
+            previousKeyboardState = currentKeyboardState;
+            currentKeyboardState = keyboardState;
         }
 
         public void UpdateGamePadState(GamePadState gamePadState)
