@@ -34,30 +34,43 @@ namespace ThraeX.Input.GameControllers
         public Keys DPadRight;
         #endregion
 
-        public KeyboardAssignment(
-            Keys A,
-            Keys B,
-            Keys X,
-            Keys Y,
-            Keys Start,
-            Keys Back,
-            Keys LeftShoulder,
-            Keys RightShoulder,
-            Keys LeftTrigger,
-            Keys RightTrigger,
-            Keys LeftStick,
-            Keys RightStick,
-            Keys LeftThumbstickUp,
-            Keys LeftThumbstickDown,
-            Keys LeftThumbstickLeft,
-            Keys LeftThumbstickRight,
-            Keys RightThumbstickUp,
-            Keys RightThumbstickDown,
-            Keys RightThumbstickLeft,
-            Keys RightThumbstickRight,
-            Keys DPadUp,
-            Keys DPadDown,
-            Keys DPadLeft,
+        /// <summary>
+        /// TODO: See if there's a better way to simplify the setup - perhaps default them all
+        /// to a "NoKey" type key, and have the user pass in a Hash containing all of the
+        /// configured keys?  The sheer number of constructor parameters here feels like an
+        /// incredible smell to me, even if this is a basic struct (so it's just to hold
+        /// configuration data).
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="B"></param>
+        /// <param name="X"></param>
+        /// <param name="Y"></param>
+        /// <param name="Start"></param>
+        /// <param name="Back"></param>
+        /// <param name="LeftShoulder"></param>
+        /// <param name="RightShoulder"></param>
+        /// <param name="LeftTrigger"></param>
+        /// <param name="RightTrigger"></param>
+        /// <param name="LeftStick"></param>
+        /// <param name="RightStick"></param>
+        /// <param name="LeftThumbstickUp"></param>
+        /// <param name="LeftThumbstickDown"></param>
+        /// <param name="LeftThumbstickLeft"></param>
+        /// <param name="LeftThumbstickRight"></param>
+        /// <param name="RightThumbstickUp"></param>
+        /// <param name="RightThumbstickDown"></param>
+        /// <param name="RightThumbstickLeft"></param>
+        /// <param name="RightThumbstickRight"></param>
+        /// <param name="DPadUp"></param>
+        /// <param name="DPadDown"></param>
+        /// <param name="DPadLeft"></param>
+        /// <param name="DPadRight"></param>
+        public KeyboardAssignment(Keys A, Keys B, Keys X, Keys Y, Keys Start,
+            Keys Back, Keys LeftShoulder, Keys RightShoulder, Keys LeftTrigger,
+            Keys RightTrigger, Keys LeftStick, Keys RightStick, Keys LeftThumbstickUp,
+            Keys LeftThumbstickDown, Keys LeftThumbstickLeft, Keys LeftThumbstickRight,
+            Keys RightThumbstickUp, Keys RightThumbstickDown, Keys RightThumbstickLeft,
+            Keys RightThumbstickRight, Keys DPadUp, Keys DPadDown, Keys DPadLeft,
             Keys DPadRight)
         {
             this.A = A;
