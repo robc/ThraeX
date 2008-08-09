@@ -35,10 +35,10 @@ namespace ThraeX.Input.GameControllers
 
         KeyboardAssignment KeyboardAssignment { get; set; }
 
-        void UpdateKeyboardState(KeyboardState keyboardState);
-        void UpdateGamePadState(GamePadState gamePadState);
+        void UpdateKeyboardState(ref KeyboardState keyboardState);
+        void UpdateGamePadState(ref GamePadState gamePadState);
         #if !XBOX
-        void UpdateMouseState(MouseState mouseState);
+        void UpdateMouseState(ref MouseState mouseState);
         #endif
     }
 }

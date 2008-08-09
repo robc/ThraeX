@@ -135,20 +135,20 @@ namespace ThraeX.Input.GameControllers
             get { return currentGamePadState.IsButtonDown(Buttons.DPadRight); }
         }
 
-        public void UpdateKeyboardState(KeyboardState keyboardState)
+        public void UpdateKeyboardState(ref KeyboardState keyboardState)
         {
             previousKeyboardState = currentKeyboardState;
             currentKeyboardState = keyboardState;
         }
 
-        public void UpdateGamePadState(GamePadState gamePadState)
+        public void UpdateGamePadState(ref GamePadState gamePadState)
         {
             previousGamePadState = currentGamePadState;
             currentGamePadState = gamePadState;
         }
 
         #if !XBOX
-        public void UpdateMouseState(MouseState mouseState)
+        public void UpdateMouseState(ref MouseState mouseState)
         {
             ;
         }

@@ -118,17 +118,17 @@ namespace ThraeX.Input.GameControllers
             get { return false; }
         }
 
-        public void UpdateKeyboardState(Microsoft.Xna.Framework.Input.KeyboardState keyboardState)
+        public void UpdateKeyboardState(ref KeyboardState keyboardState)
         {
             ;
         }
 
-        public void UpdateGamePadState(Microsoft.Xna.Framework.Input.GamePadState gamePadState)
+        public void UpdateGamePadState(ref GamePadState gamePadState)
         {
             ;
         }
 
-        public void UpdateMouseState(Microsoft.Xna.Framework.Input.MouseState mouseState)
+        public void UpdateMouseState(ref MouseState mouseState)
         {
             ;
         }

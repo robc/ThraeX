@@ -66,21 +66,21 @@ namespace ThraeX.Input
             return attachedControllers[(int)player];
         }
 
-        public void UpdateKeyboardState(KeyboardState keyboardState)
+        public void UpdateKeyboardState(ref KeyboardState keyboardState)
         {
             for (int player = (int)PlayerIndex.One; player < (int)PlayerIndex.Four; player++)
             {
-                attachedControllers[player].UpdateKeyboardState(keyboardState);
+                attachedControllers[player].UpdateKeyboardState(ref keyboardState);
             }
         }
 
-        public void UpdateGamePadState(GamePadState gamePadState, PlayerIndex player)
+        public void UpdateGamePadState(ref GamePadState gamePadState, PlayerIndex player)
         {
-            attachedControllers[(int)player].UpdateGamePadState(gamePadState);
+            attachedControllers[(int)player].UpdateGamePadState(ref gamePadState);
         }
 
         #if !XBOX
-        public void UpdateMouseState(MouseState mouseState)
+        public void UpdateMouseState(ref MouseState mouseState)
         {
             ;
         }

@@ -46,20 +46,24 @@ namespace ThraeX.Input
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public override void Update(GameTime gameTime)
         {
-            virtualControllerService.UpdateKeyboardState(Keyboard.GetState());
+            KeyboardState keyboardState = Keyboard.GetState();
+            virtualControllerService.UpdateKeyboardState(ref keyboardState);
 
             UpdateAttachedController(PlayerIndex.One);
             UpdateAttachedController(PlayerIndex.Two);
             UpdateAttachedController(PlayerIndex.Three);
             UpdateAttachedController(PlayerIndex.Four);
 
+            GamePadState gamePadState;
             for (int playerIndex = 0; playerIndex < (int)PlayerIndex.Four; playerIndex++)
             {
-                virtualControllerService.UpdateGamePadState(GamePad.GetState((PlayerIndex)playerIndex), (PlayerIndex)playerIndex);
+                gamePadState = GamePad.GetState((PlayerIndex)playerIndex);
+                virtualControllerService.UpdateGamePadState(ref gamePadState, (PlayerIndex)playerIndex);
             }
 
             #if !XBOX
-            virtualControllerService.UpdateMouseState(Mouse.GetState());
+            MouseState mouseState = Mouse.GetState();
+            virtualControllerService.UpdateMouseState(ref mouseState);
             #endif
 
             base.Update(gameTime);

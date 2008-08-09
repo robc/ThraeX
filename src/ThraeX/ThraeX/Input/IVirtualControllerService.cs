@@ -13,11 +13,11 @@ namespace ThraeX.Input
         bool IsAnyControllerConnected();
         IVirtualGameController ControllerFor(PlayerIndex player);
 
-        void UpdateKeyboardState(KeyboardState keyboardState);
-        void UpdateGamePadState(GamePadState gamePadState, PlayerIndex player);
+        void UpdateKeyboardState(ref KeyboardState keyboardState);
+        void UpdateGamePadState(ref GamePadState gamePadState, PlayerIndex player);
 
         #if !XBOX
-        void UpdateMouseState(MouseState mouseState);
+        void UpdateMouseState(ref MouseState mouseState);
         #endif
 
         bool UseDpadAsLeftStick { get; set; }
