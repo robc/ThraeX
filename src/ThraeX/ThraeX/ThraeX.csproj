@@ -78,6 +78,7 @@
     <Compile Include="Input\GameControllers\ArcadeStickGameController.cs" />
     <Compile Include="Input\GameControllers\GamePadGameController.cs" />
     <Compile Include="Input\GameControllers\IVirtualGameController.cs" />
+    <Compile Include="Input\GameControllers\KeyboardAssignment.cs" />
     <Compile Include="Input\GameControllers\NullGameController.cs" />
     <Compile Include="Input\GameControllerUpdateComponent.cs" />
     <Compile Include="Input\IVirtualControllerFactory.cs" />
