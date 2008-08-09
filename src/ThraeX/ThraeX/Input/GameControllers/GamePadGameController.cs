@@ -20,6 +20,11 @@ namespace ThraeX.Input.GameControllers
         protected KeyboardState previousKeyboardState;
         protected KeyboardAssignment keyboardAssignment;
 
+        public GamePadGameController(KeyboardAssignment keyboardAssignment)
+        {
+            this.keyboardAssignment = keyboardAssignment;
+        }
+
         public GamePadGameController()
         { }
 

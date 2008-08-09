@@ -8,30 +8,30 @@ namespace ThraeX.Input.GameControllers
     public struct KeyboardAssignment
     {
         #region Fields
-        public Keys A;
-        public Keys B;
-        public Keys X;
-        public Keys Y;
-        public Keys LeftTrigger;
-        public Keys RightTrigger;
-        public Keys LeftShoulder;
-        public Keys RightShoulder;
-        public Keys LeftStick;
-        public Keys RightStick;
-        public Keys Start;
-        public Keys Back;
-        public Keys LeftThumbstickUp;
-        public Keys LeftThumbstickDown;
-        public Keys LeftThumbstickLeft;
-        public Keys LeftThumbstickRight;
-        public Keys RightThumbstickUp;
-        public Keys RightThumbstickDown;
-        public Keys RightThumbstickLeft;
-        public Keys RightThumbstickRight;
-        public Keys DPadUp;
-        public Keys DPadDown;
-        public Keys DPadLeft;
-        public Keys DPadRight;
+        public Keys A = Keys.None;
+        public Keys B = Keys.None;
+        public Keys X = Keys.None;
+        public Keys Y = Keys.None;
+        public Keys LeftTrigger = Keys.None;
+        public Keys RightTrigger = Keys.None;
+        public Keys LeftShoulder = Keys.None;
+        public Keys RightShoulder = Keys.None;
+        public Keys LeftStick = Keys.None;
+        public Keys RightStick = Keys.None;
+        public Keys Start = Keys.None;
+        public Keys Back = Keys.None;
+        public Keys LeftThumbstickUp = Keys.None;
+        public Keys LeftThumbstickDown = Keys.None;
+        public Keys LeftThumbstickLeft = Keys.None;
+        public Keys LeftThumbstickRight = Keys.None;
+        public Keys RightThumbstickUp = Keys.None;
+        public Keys RightThumbstickDown = Keys.None;
+        public Keys RightThumbstickLeft = Keys.None;
+        public Keys RightThumbstickRight = Keys.None;
+        public Keys DPadUp = Keys.None;
+        public Keys DPadDown = Keys.None;
+        public Keys DPadLeft = Keys.None;
+        public Keys DPadRight = Keys.None;
         #endregion
 
         /// <summary>
