@@ -29,6 +29,12 @@ namespace ThraeX.Input.GameControllers
         { }
 
         #region IVirtualGameController Members
+        public KeyboardAssignment KeyboardAssignment
+        {
+            get { return this.keyboardAssignment; }
+            set { this.keyboardAssignment = value; }
+        }
+
         public bool AButton
         {
             get { return ButtonPressed(Buttons.A); }

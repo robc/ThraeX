@@ -33,6 +33,8 @@ namespace ThraeX.Input.GameControllers
         bool DPadLeft { get; }
         bool DPadRight { get; }
 
+        KeyboardAssignment KeyboardAssignment { get; set; }
+
         void UpdateKeyboardState(KeyboardState keyboardState);
         void UpdateGamePadState(GamePadState gamePadState);
         #if !XBOX
