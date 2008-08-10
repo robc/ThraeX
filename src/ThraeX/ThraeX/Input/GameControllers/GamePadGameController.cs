@@ -20,6 +20,8 @@ namespace ThraeX.Input.GameControllers
         protected KeyboardState previousKeyboardState;
         protected KeyboardAssignment keyboardAssignment;
 
+        // TODO: This constructor could be deprecated - our initialisation code
+        // simply uses the property to set it, instead of the constructor
         public GamePadGameController(KeyboardAssignment keyboardAssignment)
         {
             this.keyboardAssignment = keyboardAssignment;

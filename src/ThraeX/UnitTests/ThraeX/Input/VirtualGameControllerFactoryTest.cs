@@ -10,7 +10,7 @@ namespace UnitTests.ThraeX.Input
     public class VirtualGameControllerFactoryTest
     {
         [Fact]
-        public void ShouldReturnGamePadControllerWhenGetNewGameControllerInstanceIsCalledWithGamePadTypeOfGamePadAndKeyboardAssignmentIsPassedIn()
+        public void ShouldReturnGamePadControllerWhenGetNewGameControllerInstanceIsCalledKeyboardAssignmentIsPassedIn()
         {
             KeyboardAssignment keyboardAssignment = new KeyboardAssignment();
             VirtualGameControllerFactory virtualGameControllerFactory = new VirtualGameControllerFactory();
@@ -21,28 +21,10 @@ namespace UnitTests.ThraeX.Input
         }
 
         [Fact]
-        public void ShouldReturnGamePadControllerWhenGetNewGameControllerInstanceIsCalledWithGamePadTypeOfGamePad()
+        public void ShouldReturnGamePadControllerWhenGetNewGameControllerInstanceIsCalled()
         {
             VirtualGameControllerFactory virtualGameControllerFactory = new VirtualGameControllerFactory();
             Assert.IsType<GamePadGameController>(virtualGameControllerFactory.GetNewGameControllerInstance(GamePadType.GamePad));
-        }
-
-        [Fact]
-        public void ShouldReturnArcadeStickControllerWhenGetNewGameControllerInstanceIsCalledWithGamePadTypeOfArcadeStickAndKeyboardAssignmentIsPassedIn()
-        {
-            KeyboardAssignment keyboardAssignment = new KeyboardAssignment();
-            VirtualGameControllerFactory virtualGameControllerFactory = new VirtualGameControllerFactory();
-
-            IVirtualGameController instantiatedGameController = virtualGameControllerFactory.GetNewGameControllerInstance(GamePadType.ArcadeStick, keyboardAssignment);
-            Assert.IsType<GamePadGameController>(instantiatedGameController);
-            Assert.Equal<KeyboardAssignment>(keyboardAssignment, instantiatedGameController.KeyboardAssignment);
-        }
-        
-        [Fact]
-        public void ShouldReturnArcadeStickControllerWhenGetNewGameControllerInstanceIsCalledWithGamePadTypeOfArcadeStick()
-        {
-            VirtualGameControllerFactory virtualGameControllerFactory = new VirtualGameControllerFactory();
-            Assert.IsType<ArcadeStickGameController>(virtualGameControllerFactory.GetNewGameControllerInstance(GamePadType.ArcadeStick));
         }
     }
 }

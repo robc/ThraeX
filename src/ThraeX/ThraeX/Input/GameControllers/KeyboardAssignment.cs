@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ThraeX.Input.GameControllers
 {
+    // TODO: Default initialisation required - apparently we can't allow that
+    // to be done by default...
     public struct KeyboardAssignment
     {
         public Keys A;
