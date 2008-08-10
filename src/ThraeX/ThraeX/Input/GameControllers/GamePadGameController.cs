@@ -39,102 +39,102 @@ namespace ThraeX.Input.GameControllers
 
         public bool A
         {
-            get { return ButtonPressed(Buttons.A); }
+            get { return WasPadButtonPressed(Buttons.A) || WasKeyPressed(keyboardAssignment.A); }
         }
 
         public bool B
         {
-            get { return ButtonPressed(Buttons.B); }
+            get { return WasPadButtonPressed(Buttons.B) || WasKeyPressed(keyboardAssignment.B); }
         }
 
         public bool X
         {
-            get { return ButtonPressed(Buttons.X); }
+            get { return WasPadButtonPressed(Buttons.X) || WasKeyPressed(keyboardAssignment.X); }
         }
 
         public bool Y
         {
-            get { return ButtonPressed(Buttons.Y); }
+            get { return WasPadButtonPressed(Buttons.Y) || WasKeyPressed(keyboardAssignment.Y); }
         }
 
         public bool Start
         {
-            get { return ButtonPressed(Buttons.Start); }
+            get { return WasPadButtonPressed(Buttons.Start) || WasKeyPressed(keyboardAssignment.Start); }
         }
 
         public bool Back
         {
-            get { return ButtonPressed(Buttons.Back); }
+            get { return WasPadButtonPressed(Buttons.Back) || WasKeyPressed(keyboardAssignment.Back); }
         }
 
         public bool LeftStick
         {
-            get { return ButtonPressed(Buttons.LeftStick); }
+            get { return WasPadButtonPressed(Buttons.LeftStick) || WasKeyPressed(keyboardAssignment.LeftStick); }
         }
 
         public bool RightStick
         {
-            get { return ButtonPressed(Buttons.RightStick); }
+            get { return WasPadButtonPressed(Buttons.RightStick) || WasKeyPressed(keyboardAssignment.RightStick); }
         }
 
         public bool RightShoulder
         {
-            get { return ButtonPressed(Buttons.RightShoulder); }
+            get { return WasPadButtonPressed(Buttons.RightShoulder) || WasKeyPressed(keyboardAssignment.RightShoulder); }
         }
 
         public bool LeftShoulder
         {
-            get { return ButtonPressed(Buttons.LeftShoulder); }
+            get { return WasPadButtonPressed(Buttons.LeftShoulder) || WasKeyPressed(keyboardAssignment.LeftShoulder); }
         }
 
         public float LeftStickX
         {
-            get { return currentGamePadState.ThumbSticks.Left.X; }
+            get { return ReadStickAxis(currentGamePadState.ThumbSticks.Left.X, keyboardAssignment.LeftThumbstickLeft, keyboardAssignment.LeftThumbstickRight); }
         }
 
         public float LeftStickY
         {
-            get { return currentGamePadState.ThumbSticks.Left.Y; }
+            get { return ReadStickAxis(currentGamePadState.ThumbSticks.Left.Y, keyboardAssignment.LeftThumbstickDown, keyboardAssignment.LeftThumbstickUp); }
         }
 
         public float RightStickX
         {
-            get { return currentGamePadState.ThumbSticks.Right.X; }
+            get { return ReadStickAxis(currentGamePadState.ThumbSticks.Right.X, keyboardAssignment.RightThumbstickLeft, keyboardAssignment.RightThumbstickRight); }
         }
 
         public float RightStickY
         {
-            get { return currentGamePadState.ThumbSticks.Right.Y; }
+            get { return ReadStickAxis(currentGamePadState.ThumbSticks.Right.Y, keyboardAssignment.RightThumbstickDown, keyboardAssignment.RightThumbstickUp); }
         }
 
         public float LeftTrigger
         {
-            get { return currentGamePadState.Triggers.Left; }
+            get { return ReadTriggerAxis(currentGamePadState.Triggers.Left, keyboardAssignment.LeftTrigger); }
         }
 
         public float RightTrigger
         {
-            get { return currentGamePadState.Triggers.Right; }
+            get { return ReadTriggerAxis(currentGamePadState.Triggers.Right, keyboardAssignment.RightTrigger); }
         }
 
         public bool DPadUp
         {
-            get { return currentGamePadState.IsButtonDown(Buttons.DPadUp); }
+            get { return currentGamePadState.IsButtonDown(Buttons.DPadUp) || WasKeyPressed(keyboardAssignment.DPadUp); }
         }
 
         public bool DPadDown
         {
-            get { return currentGamePadState.IsButtonDown(Buttons.DPadDown); }
+            get { return currentGamePadState.IsButtonDown(Buttons.DPadDown) || WasKeyPressed(keyboardAssignment.DPadDown); }
         }
 
         public bool DPadLeft
         {
-            get { return currentGamePadState.IsButtonDown(Buttons.DPadLeft); }
+            get { return currentGamePadState.IsButtonDown(Buttons.DPadLeft) || WasKeyPressed(keyboardAssignment.DPadLeft); }
         }
 
         public bool DPadRight
         {
-            get { return currentGamePadState.IsButtonDown(Buttons.DPadRight); }
+            get { return currentGamePadState.IsButtonDown(Buttons.DPadRight) || WasKeyPressed(keyboardAssignment.DPadRight); }
         }
 
         public void UpdateKeyboardState(ref KeyboardState keyboardState)
@@ -157,10 +157,6 @@ namespace ThraeX.Input.GameControllers
         #endif
         #endregion
 
-        /// Is it worth considering a composition model for the behaviour of the buttons, and D-Pad
-        /// If this is done - we would certainly want separate behaviour for the UI screens in the
-        /// application (to prevent the Rockblaster start-causes-the-UI-to-go-off-and-back-on issue).
-
         #region Utility Functions
         /// <summary>
         /// Tests for whether a button on the controller was pressed in a 'debounced' fashion,
@@ -168,9 +164,58 @@ namespace ThraeX.Input.GameControllers
         /// </summary>
         /// <param name="button">The button on the controller to test</param>
         /// <returns>A bool indicating whether or not the button was pressed.</returns>
-        protected bool ButtonPressed(Buttons button)
+        protected bool WasPadButtonPressed(Buttons button)
         {
             return currentGamePadState.IsButtonDown(button) && previousGamePadState.IsButtonUp(button);
+        }
+
+        protected bool IsKeyDown(Keys key)
+        {
+            return (currentKeyboardState.IsKeyDown(key));
+        }
+
+        // TODO: Review & confirm to see if we actually care about this...
+        protected bool IsHoldingKey(Keys key)
+        {
+            return (currentKeyboardState.IsKeyDown(key) && previousKeyboardState.IsKeyDown(key));
+        }
+
+        protected bool WasKeyPressed(Keys key)
+        {
+            return (currentKeyboardState.IsKeyDown(key) && previousKeyboardState.IsKeyUp(key));
+        }
+
+        protected bool WasKeyReleased(Keys key)
+        {
+            return (currentKeyboardState.IsKeyUp(key) && previousKeyboardState.IsKeyDown(key));
+        }
+
+        protected float ReadStickAxis(float gamePadAxis, Keys negativeKey, Keys positiveKey)
+        {
+            float result = 0f;
+
+            if (currentKeyboardState.IsKeyDown(negativeKey))
+                result = -1f;
+            else if (currentKeyboardState.IsKeyDown(positiveKey))
+                result = 1f;
+
+            if (gamePadAxis != 0)
+                result = gamePadAxis;
+
+            return result;            
+        }
+
+        protected float ReadTriggerAxis(float triggerAxis, Keys triggerKey)
+        {
+            float result = 0f;
+
+            if (currentKeyboardState.IsKeyDown(triggerKey))
+                result = 1f;
+
+            if (triggerAxis != 0)
+                result = triggerAxis;
+
+            return result;
         }
         #endregion
     }
