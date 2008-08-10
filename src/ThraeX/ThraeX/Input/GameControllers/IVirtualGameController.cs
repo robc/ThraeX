@@ -5,8 +5,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ThraeX.Input.GameControllers
 {
-    // TODO: Review the naming of these properties - look at what XNA has defined, and see if I can synch up the names
-    // (which in fact might be better for consistency)
     public interface IVirtualGameController
     {
         bool A { get; }
