@@ -35,82 +35,82 @@ namespace ThraeX.Input.GameControllers
             set { this.keyboardAssignment = value; }
         }
 
-        public bool AButton
+        public bool A
         {
             get { return ButtonPressed(Buttons.A); }
         }
 
-        public bool BButton
+        public bool B
         {
             get { return ButtonPressed(Buttons.B); }
         }
 
-        public bool XButton
+        public bool X
         {
             get { return ButtonPressed(Buttons.X); }
         }
 
-        public bool YButton
+        public bool Y
         {
             get { return ButtonPressed(Buttons.Y); }
         }
 
-        public bool StartButton
+        public bool Start
         {
             get { return ButtonPressed(Buttons.Start); }
         }
 
-        public bool BackButton
+        public bool Back
         {
             get { return ButtonPressed(Buttons.Back); }
         }
 
-        public bool LStickClick
+        public bool LeftStick
         {
             get { return ButtonPressed(Buttons.LeftStick); }
         }
 
-        public bool RStickClick
+        public bool RightStick
         {
             get { return ButtonPressed(Buttons.RightStick); }
         }
 
-        public bool RBumper
+        public bool RightShoulder
         {
             get { return ButtonPressed(Buttons.RightShoulder); }
         }
 
-        public bool LBumper
+        public bool LeftShoulder
         {
             get { return ButtonPressed(Buttons.LeftShoulder); }
         }
 
-        public float LStickX
+        public float LeftStickX
         {
             get { return currentGamePadState.ThumbSticks.Left.X; }
         }
 
-        public float LStickY
+        public float LeftStickY
         {
             get { return currentGamePadState.ThumbSticks.Left.Y; }
         }
 
-        public float RStickX
+        public float RightStickX
         {
             get { return currentGamePadState.ThumbSticks.Right.X; }
         }
 
-        public float RStickY
+        public float RightStickY
         {
             get { return currentGamePadState.ThumbSticks.Right.Y; }
         }
 
-        public float LTrigger
+        public float LeftTrigger
         {
             get { return currentGamePadState.Triggers.Left; }
         }
 
-        public float RTrigger
+        public float RightTrigger
         {
             get { return currentGamePadState.Triggers.Right; }
         }

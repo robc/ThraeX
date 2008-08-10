@@ -18,82 +18,82 @@ namespace ThraeX.Input.GameControllers
             set { ; }
         }
 
-        public bool AButton
+        public bool A
         {
             get { return false; }
         }
 
-        public bool BButton
+        public bool B
         {
             get { return false; }
         }
 
-        public bool XButton
+        public bool X
         {
             get { return false; }
         }
 
-        public bool YButton
+        public bool Y
         {
             get { return false; }
         }
 
-        public bool StartButton
+        public bool Start
         {
             get { return false; }
         }
 
-        public bool BackButton
+        public bool Back
         {
             get { return false; }
         }
 
-        public bool LStickClick
+        public bool LeftStick
         {
             get { return false; }
         }
 
-        public bool RStickClick
+        public bool RightStick
         {
             get { return false; }
         }
 
-        public bool RBumper
+        public bool RightShoulder
         {
             get { return false; }
         }
 
-        public bool LBumper
+        public bool LeftShoulder
         {
             get { return false; }
         }
 
-        public float LStickX
+        public float LeftStickX
         {
             get { return 0.0f; }
         }
 
-        public float LStickY
+        public float LeftStickY
         {
             get { return 0.0f; }
         }
 
-        public float RStickX
+        public float RightStickX
         {
             get { return 0.0f; }
         }
 
-        public float RStickY
+        public float RightStickY
         {
             get { return 0.0f; }
         }
 
-        public float LTrigger
+        public float LeftTrigger
         {
             get { return 0.0f; }
         }
 
-        public float RTrigger
+        public float RightTrigger
         {
             get { return 0.0f; }
         }

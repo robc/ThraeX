@@ -9,24 +9,24 @@ namespace ThraeX.Input.GameControllers
     // (which in fact might be better for consistency)
     public interface IVirtualGameController
     {
-        bool AButton { get; }
-        bool BButton { get; }
-        bool XButton { get; }
-        bool YButton { get; }
-        bool StartButton { get; }
-        bool BackButton { get; }
-        bool LStickClick { get; }
-        bool RStickClick { get; }
-        bool RBumper { get; }
-        bool LBumper { get; }
+        bool A { get; }
+        bool B { get; }
+        bool X { get; }
+        bool Y { get; }
+        bool Start { get; }
+        bool Back { get; }
+        bool LeftStick { get; }
+        bool RightStick { get; }
+        bool RightShoulder { get; }
+        bool LeftShoulder { get; }
 
-        float LStickX { get; }
-        float LStickY { get; }
-        float RStickX { get; }
-        float RStickY { get; }
+        float LeftStickX { get; }
+        float LeftStickY { get; }
+        float RightStickX { get; }
+        float RightStickY { get; }
 
-        float LTrigger { get; }
-        float RTrigger { get; }
+        float LeftTrigger { get; }
+        float RightTrigger { get; }
 
         bool DPadUp { get; }
         bool DPadDown { get; }

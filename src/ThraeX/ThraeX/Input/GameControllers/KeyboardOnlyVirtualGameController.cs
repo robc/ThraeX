@@ -18,82 +18,82 @@ namespace ThraeX.Input.GameControllers
         }
 
         #region IVirtualGameController Members
-        public bool AButton
+        public bool A
         {
             get { return WasKeyPressed(keyboardAssignment.A); }
         }
 
-        public bool BButton
+        public bool B
         {
             get { return WasKeyPressed(keyboardAssignment.B); }
         }
 
-        public bool XButton
+        public bool X
         {
             get { return WasKeyPressed(keyboardAssignment.X); }
         }
 
-        public bool YButton
+        public bool Y
         {
             get { return WasKeyPressed(keyboardAssignment.Y); }
         }
 
-        public bool StartButton
+        public bool Start
         {
             get { return WasKeyPressed(keyboardAssignment.Start); }
         }
 
-        public bool BackButton
+        public bool Back
         {
             get { return WasKeyPressed(keyboardAssignment.Back); }
         }
 
-        public bool LStickClick
+        public bool LeftStick
         {
             get { return WasKeyPressed(keyboardAssignment.LeftStick); }
         }
 
-        public bool RStickClick
+        public bool RightStick
         {
             get { return WasKeyPressed(keyboardAssignment.RightStick); }
         }
 
-        public bool RBumper
+        public bool RightShoulder
         {
             get { return WasKeyPressed(keyboardAssignment.RightShoulder); }
         }
 
-        public bool LBumper
+        public bool LeftShoulder
         {
             get { return WasKeyPressed(keyboardAssignment.LeftShoulder); }
         }
 
-        public float LStickX
+        public float LeftStickX
         {
             get { return GetInputAmountForKeyboardRange(keyboardAssignment.LeftThumbstickLeft, keyboardAssignment.LeftThumbstickRight); }
         }
 
-        public float LStickY
+        public float LeftStickY
         {
             get { return GetInputAmountForKeyboardRange(keyboardAssignment.LeftThumbstickUp, keyboardAssignment.LeftThumbstickDown); }
         }
 
-        public float RStickX
+        public float RightStickX
         {
             get { return GetInputAmountForKeyboardRange(keyboardAssignment.RightThumbstickLeft, keyboardAssignment.RightThumbstickRight); }
         }
 
-        public float RStickY
+        public float RightStickY
         {
             get { return GetInputAmountForKeyboardRange(keyboardAssignment.RightThumbstickUp, keyboardAssignment.RightThumbstickDown); }
         }
 
-        public float LTrigger
+        public float LeftTrigger
         {
             get { return (currentKeyboardState.IsKeyDown(keyboardAssignment.LeftTrigger) ? 1f : 0f); }
         }
 
-        public float RTrigger
+        public float RightTrigger
         {
             get { return (currentKeyboardState.IsKeyDown(keyboardAssignment.RightTrigger) ? 1f : 0f); }
         }
