@@ -14,18 +14,19 @@ namespace ThraeX.Input
         private static readonly GamePadType[] DEFAULT_GAMEPAD_TYPES = { GamePadType.GamePad };
         #endregion
 
-        private IVirtualControllerFactory virtualControllerFactory;
+        private IVirtualGameControllerFactory virtualControllerFactory;
         private bool useDPadAsLeftStick;
 
         private IVirtualGameController[] attachedControllers;
+        private KeyboardAssignment[] keyboardAssignments;
         private GamePadType[] gamePadTypes;
 
-        public VirtualControllerService(IVirtualControllerFactory virtualControllerFactory)
-            : this(virtualControllerFactory, new GamePadType[] { GamePadType.GamePad })
+        public VirtualControllerService(IVirtualGameControllerFactory virtualControllerFactory)
+            : this(virtualControllerFactory, DEFAULT_GAMEPAD_TYPES)
         { }
 
         public VirtualControllerService(
-            IVirtualControllerFactory virtualControllerFactory,
+            IVirtualGameControllerFactory virtualControllerFactory,
             GamePadType[] gamePadTypes)
         {
             this.gamePadTypes = gamePadTypes;
@@ -41,6 +42,12 @@ namespace ThraeX.Input
             attachedControllers[(int)PlayerIndex.Two] = NULL_CONTROLLER;
             attachedControllers[(int)PlayerIndex.Three] = NULL_CONTROLLER;
             attachedControllers[(int)PlayerIndex.Four] = NULL_CONTROLLER;
+
+            keyboardAssignments = new KeyboardAssignment[(int)PlayerIndex.Four];
+            keyboardAssignments[(int)PlayerIndex.One] = new KeyboardAssignment();
+            keyboardAssignments[(int)PlayerIndex.Two] = new KeyboardAssignment();
+            keyboardAssignments[(int)PlayerIndex.Three] = new KeyboardAssignment();
+            keyboardAssignments[(int)PlayerIndex.Four] = new KeyboardAssignment();
         }
 
         #region IVirtualControllerService Members

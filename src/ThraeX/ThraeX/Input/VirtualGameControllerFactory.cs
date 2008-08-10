@@ -7,7 +7,7 @@ using ThraeX.Input.GameControllers;
 
 namespace ThraeX.Input
 {
-    public class VirtualGameControllerFactory : IVirtualControllerFactory
+    public class VirtualGameControllerFactory : IVirtualGameControllerFactory
     {
         public VirtualGameControllerFactory()
         { }
@@ -24,6 +24,14 @@ namespace ThraeX.Input
         /// </summary>
         /// <param name="gamePadType">The GamePadType to create a specified instance for</param>
         /// <returns>An instance of IVirtualGameController for the desired type, or null for unsupported types</returns>
+        public IVirtualGameController GetNewGameControllerInstance(GamePadType gamePadType, KeyboardAssignment keyboardAssignment)
+        {
+            IVirtualGameController gameController = GetNewGameControllerInstance(gamePadType);
+            gameController.KeyboardAssignment = keyboardAssignment;
+
+            return gameController;
+        }
+
         public IVirtualGameController GetNewGameControllerInstance(GamePadType gamePadType)
         {
             IVirtualGameController gameController;
