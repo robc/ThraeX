@@ -135,10 +135,12 @@ namespace ThraeX.Input.GameControllers
             ;
         }
 
+        #if !XBOX
         public void UpdateMouseState(ref MouseState mouseState)
         {
             ;
         }
+        #endif
         #endregion
 
         private float GetInputAmountForKeyboardRange(Keys negativeKey, Keys positiveKey)

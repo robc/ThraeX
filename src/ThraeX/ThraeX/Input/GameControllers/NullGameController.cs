@@ -128,10 +128,12 @@ namespace ThraeX.Input.GameControllers
             ;
         }
 
+        #if !XBOX
         public void UpdateMouseState(ref MouseState mouseState)
         {
             ;
         }
+        #endif
         #endregion
     }
 }
