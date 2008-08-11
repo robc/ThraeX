@@ -25,5 +25,7 @@ namespace ThraeX.Input
         void DetachController(PlayerIndex player);
         void AttachController(PlayerIndex player, GamePadType gamePadType);
         void AttachKeyboardOnlyController(PlayerIndex player);
+
+        void SetKeyboardAssignment(PlayerIndex player, KeyboardAssignment keyboardAssignment);
     }
 }

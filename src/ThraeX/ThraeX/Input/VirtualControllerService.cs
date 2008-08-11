@@ -37,13 +37,13 @@ namespace ThraeX.Input
 
         private void InitialiseAttachedControllersArray()
         {
-            attachedControllers = new IVirtualGameController[(int)PlayerIndex.Four];
+            attachedControllers = new IVirtualGameController[((int)PlayerIndex.Four) + 1];
             attachedControllers[(int)PlayerIndex.One] = NULL_CONTROLLER;
             attachedControllers[(int)PlayerIndex.Two] = NULL_CONTROLLER;
             attachedControllers[(int)PlayerIndex.Three] = NULL_CONTROLLER;
             attachedControllers[(int)PlayerIndex.Four] = NULL_CONTROLLER;
 
-            keyboardAssignments = new KeyboardAssignment[(int)PlayerIndex.Four];
+            keyboardAssignments = new KeyboardAssignment[((int)PlayerIndex.Four) + 1];
             keyboardAssignments[(int)PlayerIndex.One] = new KeyboardAssignment();
             keyboardAssignments[(int)PlayerIndex.Two] = new KeyboardAssignment();
             keyboardAssignments[(int)PlayerIndex.Three] = new KeyboardAssignment();
@@ -75,7 +75,7 @@ namespace ThraeX.Input
 
         public void UpdateKeyboardState(ref KeyboardState keyboardState)
         {
-            for (int player = (int)PlayerIndex.One; player < (int)PlayerIndex.Four; player++)
+            for (int player = (int)PlayerIndex.One; player <= (int)PlayerIndex.Four; player++)
             {
                 attachedControllers[player].UpdateKeyboardState(ref keyboardState);
             }
@@ -92,6 +92,11 @@ namespace ThraeX.Input
             ;
         }
         #endif
+
+        public void SetKeyboardAssignment(PlayerIndex player, KeyboardAssignment keyboardAssignment)
+        {
+            keyboardAssignments[(int)player] = keyboardAssignment;
+        }
 
         public bool UseDpadAsLeftStick
         {
