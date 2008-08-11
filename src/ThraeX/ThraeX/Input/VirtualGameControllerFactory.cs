@@ -36,6 +36,11 @@ namespace ThraeX.Input
         {
             return new GamePadGameController();
         }
+
+        public IVirtualGameController GetNewKeyboardOnlyControllerInstance(KeyboardAssignment keyboardAssignment)
+        {
+            return new KeyboardOnlyVirtualGameController(keyboardAssignment);
+        }
         #endregion
     }
 }

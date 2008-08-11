@@ -109,6 +109,11 @@ namespace ThraeX.Input
             if (IsControllerTypeAllowed(gamePadType))
                 attachedControllers[(int)player] = virtualControllerFactory.GetNewGameControllerInstance(gamePadType, keyboardAssignments[(int)player]);
         }
+
+        public void AttachKeyboardOnlyController(PlayerIndex player)
+        {
+            attachedControllers[(int)player] = virtualControllerFactory.GetNewKeyboardOnlyControllerInstance(keyboardAssignments[(int)player]);
+        }
         #endregion
 
         private bool IsControllerTypeAllowed(GamePadType gamePadType)

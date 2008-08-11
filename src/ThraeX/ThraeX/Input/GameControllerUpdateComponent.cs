@@ -33,8 +33,9 @@ namespace ThraeX.Input
             virtualControllerService.AttachController(PlayerIndex.Three, GamePad.GetCapabilities(PlayerIndex.Three).GamePadType);
             virtualControllerService.AttachController(PlayerIndex.Four, GamePad.GetCapabilities(PlayerIndex.Four).GamePadType);
 
-            // Test to see if there's are no controllers attached, and if so, then we attach a keyboard VirtualGameController
-            // onto the service.
+            // Attaches a KeyboardOnly controller if none of the other controllers were atta
+            if (!virtualControllerService.IsAnyControllerConnected())
+                virtualControllerService.AttachKeyboardOnlyController(PlayerIndex.One);
 
             base.Initialize();
         }

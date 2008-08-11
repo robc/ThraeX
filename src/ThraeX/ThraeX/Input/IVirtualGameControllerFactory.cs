@@ -10,5 +10,6 @@ namespace ThraeX.Input
     {
         IVirtualGameController GetNewGameControllerInstance(GamePadType gamePadType);
         IVirtualGameController GetNewGameControllerInstance(GamePadType gamePadType, KeyboardAssignment keyboardAssignment);
+        IVirtualGameController GetNewKeyboardOnlyControllerInstance(KeyboardAssignment keyboardAssignment);
     }
 }
