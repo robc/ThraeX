@@ -155,22 +155,22 @@ namespace ThraeX.Input.GameControllers
             return result;
         }
 
-        public bool IsKeyDown(Keys key)
+        private bool IsKeyDown(Keys key)
         {
             return (currentKeyboardState.IsKeyDown(key));
         }
 
-        public bool IsHoldingKey(Keys key)
+        private bool IsHoldingKey(Keys key)
         {
             return (currentKeyboardState.IsKeyDown(key) && previousKeyboardState.IsKeyDown(key));
         }
 
-        public bool WasKeyPressed(Keys key)
+        private bool WasKeyPressed(Keys key)
         {
             return (currentKeyboardState.IsKeyDown(key) && previousKeyboardState.IsKeyUp(key));
         }
 
-        public bool HasReleasedKey(Keys key)
+        private bool HasReleasedKey(Keys key)
         {
             return (currentKeyboardState.IsKeyUp(key) && previousKeyboardState.IsKeyDown(key));
         }

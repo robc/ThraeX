@@ -18,7 +18,7 @@ namespace ThraeX.Input
         private bool useDPadAsLeftStick;
 
         private IVirtualGameController[] attachedControllers;
-        private KeyboardAssignment[] keyboardAssignments;
+        private KeyboardAssignment? [] keyboardAssignments;
         private GamePadType[] gamePadTypes;
 
         public VirtualControllerService(IVirtualGameControllerFactory virtualControllerFactory)
@@ -43,11 +43,11 @@ namespace ThraeX.Input
             attachedControllers[(int)PlayerIndex.Three] = NULL_CONTROLLER;
             attachedControllers[(int)PlayerIndex.Four] = NULL_CONTROLLER;
 
-            keyboardAssignments = new KeyboardAssignment[((int)PlayerIndex.Four) + 1];
-            keyboardAssignments[(int)PlayerIndex.One] = new KeyboardAssignment();
-            keyboardAssignments[(int)PlayerIndex.Two] = new KeyboardAssignment();
-            keyboardAssignments[(int)PlayerIndex.Three] = new KeyboardAssignment();
-            keyboardAssignments[(int)PlayerIndex.Four] = new KeyboardAssignment();
+            keyboardAssignments = new KeyboardAssignment? [((int)PlayerIndex.Four) + 1];
+            keyboardAssignments[(int)PlayerIndex.One] = null;
+            keyboardAssignments[(int)PlayerIndex.Two] = null;
+            keyboardAssignments[(int)PlayerIndex.Three] = null;
+            keyboardAssignments[(int)PlayerIndex.Four] = null;
         }
 
         #region IVirtualControllerService Members
@@ -96,6 +96,11 @@ namespace ThraeX.Input
         public void SetKeyboardAssignment(PlayerIndex player, KeyboardAssignment keyboardAssignment)
         {
             keyboardAssignments[(int)player] = keyboardAssignment;
+
+            if (attachedControllers[(int)player] != NULL_CONTROLLER && keyboardAssignments[(int)player].HasValue)
+                attachedControllers[(int)player].KeyboardAssignment = keyboardAssignment;
+            else
+                attachedControllers[(int)player] = new KeyboardOnlyVirtualGameController(keyboardAssignment);
         }
 
         public bool UseDpadAsLeftStick
@@ -106,18 +111,22 @@ namespace ThraeX.Input
 
         public void DetachController(PlayerIndex player)
         {
-            attachedControllers[(int)player] = NULL_CONTROLLER;
+            if (keyboardAssignments[(int)player].HasValue)
+                attachedControllers[(int)player] = new KeyboardOnlyVirtualGameController(keyboardAssignments[(int)player].Value);
+            else
+                attachedControllers[(int)player] = NULL_CONTROLLER;
         }
 
         public void AttachController(PlayerIndex player, GamePadType gamePadType)
         {
             if (IsControllerTypeAllowed(gamePadType))
-                attachedControllers[(int)player] = virtualControllerFactory.GetNewGameControllerInstance(gamePadType, keyboardAssignments[(int)player]);
+                attachedControllers[(int)player] = virtualControllerFactory.GetNewGameControllerInstance(gamePadType, keyboardAssignments[(int)player].Value);
         }
 
         public void AttachKeyboardOnlyController(PlayerIndex player)
         {
-            attachedControllers[(int)player] = virtualControllerFactory.GetNewKeyboardOnlyControllerInstance(keyboardAssignments[(int)player]);
+            if (keyboardAssignments[(int)player].HasValue)
+                attachedControllers[(int)player] = virtualControllerFactory.GetNewKeyboardOnlyControllerInstance(keyboardAssignments[(int)player].Value);
         }
         #endregion
 
