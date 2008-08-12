@@ -20,7 +20,11 @@ namespace ThraeX.Input.GameControllers
         #region IVirtualGameController Members
         public bool A
         {
-            get { return WasKeyPressed(keyboardAssignment.A); }
+            get
+            {
+                Console.WriteLine("Key: {0} - is down: {1}", keyboardAssignment.A, currentKeyboardState.IsKeyDown(keyboardAssignment.A));
+                return WasKeyPressed(keyboardAssignment.A);
+            }
         }
 
         public bool B
