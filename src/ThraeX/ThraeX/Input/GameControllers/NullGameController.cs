@@ -73,6 +73,26 @@ namespace ThraeX.Input.GameControllers
             get { return 0.0f; }
         }
 
+        public bool LeftThumbstickLeft
+        {
+            get { return false; }
+        }
+
+        public bool LeftThumbstickRight
+        {
+            get { return false; }
+        }
+
+        public bool LeftThumbstickUp
+        {
+            get { return false; }
+        }
+
+        public bool LeftThumbstickDown
+        {
+            get { return false; }
+        }
+
         public float LeftStickY
         {
             get { return 0.0f; }
@@ -86,6 +106,26 @@ namespace ThraeX.Input.GameControllers
         public float RightStickY
         {
             get { return 0.0f; }
+        }
+
+        public bool RightThumbstickLeft
+        {
+            get { return false; }
+        }
+
+        public bool RightThumbstickRight
+        {
+            get { return false; }
+        }
+
+        public bool RightThumbstickUp
+        {
+            get { return false; }
+        }
+
+        public bool RightThumbstickDown
+        {
+            get { return false; }
         }
 
         public float LeftTrigger

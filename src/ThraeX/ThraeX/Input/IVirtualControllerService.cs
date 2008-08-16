@@ -22,6 +22,8 @@ namespace ThraeX.Input
 
         bool UseDpadAsLeftStick { get; set; }
 
+        bool WasButtonPressed(Buttons button);
+
         void DetachController(PlayerIndex player);
         void AttachController(PlayerIndex player, GamePadType gamePadType);
         void AttachKeyboardOnlyController(PlayerIndex player);

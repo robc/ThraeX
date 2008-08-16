@@ -97,6 +97,26 @@ namespace ThraeX.Input.GameControllers
             get { return ReadStickAxis(currentGamePadState.ThumbSticks.Left.Y, keyboardAssignment.LeftThumbstickDown, keyboardAssignment.LeftThumbstickUp); }
         }
 
+        public bool LeftThumbstickLeft
+        {
+            get { return WasPadButtonPressed(Buttons.LeftThumbstickLeft) || WasKeyPressed(keyboardAssignment.LeftThumbstickLeft); }
+        }
+
+        public bool LeftThumbstickRight
+        {
+            get { return WasPadButtonPressed(Buttons.LeftThumbstickRight) || WasKeyPressed(keyboardAssignment.LeftThumbstickRight); }
+        }
+
+        public bool LeftThumbstickUp
+        {
+            get { return WasPadButtonPressed(Buttons.LeftThumbstickUp) || WasKeyPressed(keyboardAssignment.LeftThumbstickUp); }
+        }
+
+        public bool LeftThumbstickDown
+        {
+            get { return WasPadButtonPressed(Buttons.LeftThumbstickDown) || WasKeyPressed(keyboardAssignment.LeftThumbstickDown); }
+        }
+
         public float RightStickX
         {
             get { return ReadStickAxis(currentGamePadState.ThumbSticks.Right.X, keyboardAssignment.RightThumbstickLeft, keyboardAssignment.RightThumbstickRight); }
@@ -105,6 +125,26 @@ namespace ThraeX.Input.GameControllers
         public float RightStickY
         {
             get { return ReadStickAxis(currentGamePadState.ThumbSticks.Right.Y, keyboardAssignment.RightThumbstickDown, keyboardAssignment.RightThumbstickUp); }
+        }
+
+        public bool RightThumbstickLeft
+        {
+            get { return WasPadButtonPressed(Buttons.RightThumbstickLeft) || WasKeyPressed(keyboardAssignment.RightThumbstickLeft); }
+        }
+
+        public bool RightThumbstickRight
+        {
+            get { return WasPadButtonPressed(Buttons.RightThumbstickRight) || WasKeyPressed(keyboardAssignment.RightThumbstickRight); }
+        }
+
+        public bool RightThumbstickUp
+        {
+            get { return WasPadButtonPressed(Buttons.RightThumbstickUp) || WasKeyPressed(keyboardAssignment.RightThumbstickUp); }
+        }
+
+        public bool RightThumbstickDown
+        {
+            get { return WasPadButtonPressed(Buttons.RightThumbstickDown) || WasKeyPressed(keyboardAssignment.RightThumbstickDown); }
         }
 
         public float LeftTrigger
@@ -119,22 +159,22 @@ namespace ThraeX.Input.GameControllers
 
         public bool DPadUp
         {
-            get { return currentGamePadState.IsButtonDown(Buttons.DPadUp) || WasKeyPressed(keyboardAssignment.DPadUp); }
+            get { return WasPadButtonPressed(Buttons.DPadUp) || WasKeyPressed(keyboardAssignment.DPadUp); }
         }
 
         public bool DPadDown
         {
-            get { return currentGamePadState.IsButtonDown(Buttons.DPadDown) || WasKeyPressed(keyboardAssignment.DPadDown); }
+            get { return WasPadButtonPressed(Buttons.DPadDown) || WasKeyPressed(keyboardAssignment.DPadDown); }
         }
 
         public bool DPadLeft
         {
-            get { return currentGamePadState.IsButtonDown(Buttons.DPadLeft) || WasKeyPressed(keyboardAssignment.DPadLeft); }
+            get { return WasPadButtonPressed(Buttons.DPadLeft) || WasKeyPressed(keyboardAssignment.DPadLeft); }
         }
 
         public bool DPadRight
         {
-            get { return currentGamePadState.IsButtonDown(Buttons.DPadRight) || WasKeyPressed(keyboardAssignment.DPadRight); }
+            get { return WasPadButtonPressed(Buttons.DPadRight) || WasKeyPressed(keyboardAssignment.DPadRight); }
         }
 
         public void UpdateKeyboardState(ref KeyboardState keyboardState)
@@ -167,6 +207,11 @@ namespace ThraeX.Input.GameControllers
         protected bool WasPadButtonPressed(Buttons button)
         {
             return currentGamePadState.IsButtonDown(button) && previousGamePadState.IsButtonUp(button);
+        }
+
+        protected bool IsPadButtonDown(Buttons button)
+        {
+            return currentGamePadState.IsButtonDown(button);
         }
 
         protected bool IsKeyDown(Keys key)

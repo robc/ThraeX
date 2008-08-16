@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -78,6 +79,22 @@ namespace ThraeX.Input
         public IVirtualGameController ControllerFor(PlayerIndex player)
         {
             return attachedControllers[(int)player];
+        }
+
+        public bool WasButtonPressed(Buttons button)
+        {
+            bool pressed = false;
+            PropertyInfo propertyInfo;
+
+            for (int player = 0; player <= (int)PlayerIndex.Four; player++)
+            {
+                propertyInfo = attachedControllers[(int)player].GetType().GetProperty(button.ToString());
+                pressed |= (bool)propertyInfo.GetValue(attachedControllers[(int)player], null);
+
+                if (pressed) break;
+            }
+
+            return pressed;
         }
 
         public void UpdateKeyboardState(ref KeyboardState keyboardState)
