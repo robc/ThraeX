@@ -80,22 +80,22 @@ namespace ThraeX.Input.GameControllers
 
         public bool LeftThumbstickLeft
         {
-            get { return IsHoldingKey(keyboardAssignment.LeftThumbstickLeft); }
+            get { return WasKeyPressed(keyboardAssignment.LeftThumbstickLeft); }
         }
 
         public bool LeftThumbstickRight
         {
-            get { return IsHoldingKey(keyboardAssignment.LeftThumbstickRight); }
+            get { return WasKeyPressed(keyboardAssignment.LeftThumbstickRight); }
         }
 
         public bool LeftThumbstickUp
         {
-            get { return IsHoldingKey(keyboardAssignment.LeftThumbstickUp); }
+            get { return WasKeyPressed(keyboardAssignment.LeftThumbstickUp); }
         }
 
         public bool LeftThumbstickDown
         {
-            get { return IsHoldingKey(keyboardAssignment.LeftThumbstickDown); }
+            get { return WasKeyPressed(keyboardAssignment.LeftThumbstickDown); }
         }
 
         public float RightStickX
@@ -110,22 +110,22 @@ namespace ThraeX.Input.GameControllers
 
         public bool RightThumbstickLeft
         {
-            get { return IsHoldingKey(keyboardAssignment.RightThumbstickLeft); }
+            get { return WasKeyPressed(keyboardAssignment.RightThumbstickLeft); }
         }
 
         public bool RightThumbstickRight
         {
-            get { return IsHoldingKey(keyboardAssignment.RightThumbstickRight); }
+            get { return WasKeyPressed(keyboardAssignment.RightThumbstickRight); }
         }
 
         public bool RightThumbstickUp
         {
-            get { return IsHoldingKey(keyboardAssignment.RightThumbstickUp); }
+            get { return WasKeyPressed(keyboardAssignment.RightThumbstickUp); }
         }
 
         public bool RightThumbstickDown
         {
-            get { return IsHoldingKey(keyboardAssignment.RightThumbstickDown); }
+            get { return WasKeyPressed(keyboardAssignment.RightThumbstickDown); }
         }
 
         public float LeftTrigger
