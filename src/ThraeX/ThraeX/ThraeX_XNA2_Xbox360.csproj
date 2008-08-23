@@ -37,6 +37,7 @@
     <DefineConstants>TRACE;XBOX;XBOX360</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Input\GameControllers\AbstractGameController.cs" />
     <Compile Include="Input\GameControllers\GamePadGameController.cs" />
     <Compile Include="Input\GameControllers\IVirtualGameController.cs" />
     <Compile Include="Input\GameControllers\KeyboardAssignment.cs" />

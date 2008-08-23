@@ -6,13 +6,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace ThraeX.Input.GameControllers
 {
-    public class KeyboardOnlyVirtualGameController : IVirtualGameController
+    public class KeyboardOnlyVirtualGameController : AbstractGameController, IVirtualGameController
     {
-        private KeyboardAssignment keyboardAssignment;
-        private KeyboardState currentKeyboardState;
-        private KeyboardState previousKeyboardState;
-
-        public KeyboardOnlyVirtualGameController(KeyboardAssignment keyboardAssignment)
+        public KeyboardOnlyVirtualGameController(KeyboardAssignment keyboardAssignment) : base()
         {
             this.keyboardAssignment = keyboardAssignment;
         }
@@ -20,199 +16,143 @@ namespace ThraeX.Input.GameControllers
         #region IVirtualGameController Members
         public bool A
         {
-            get { return WasKeyPressed(keyboardAssignment.A.Value); }
+            get { return IsKeyReleased(keyboardAssignment.A); }
         }
 
         public bool B
         {
-            get { return WasKeyPressed(keyboardAssignment.B.Value); }
+            get { return IsKeyReleased(keyboardAssignment.B); }
         }
 
         public bool X
         {
-            get { return WasKeyPressed(keyboardAssignment.X.Value); }
+            get { return IsKeyReleased(keyboardAssignment.X); }
         }
 
         public bool Y
         {
-            get { return WasKeyPressed(keyboardAssignment.Y.Value); }
+            get { return IsKeyReleased(keyboardAssignment.Y); }
         }
 
         public bool Start
         {
-            get { return WasKeyPressed(keyboardAssignment.Start.Value); }
+            get { return IsKeyReleased(keyboardAssignment.Start); }
         }
 
         public bool Back
         {
-            get { return WasKeyPressed(keyboardAssignment.Back.Value); }
+            get { return IsKeyReleased(keyboardAssignment.Back); }
         }
 
         public bool LeftStick
         {
-            get { return WasKeyPressed(keyboardAssignment.LeftStick.Value); }
+            get { return IsKeyReleased(keyboardAssignment.LeftStick); }
         }
 
         public bool RightStick
         {
-            get { return WasKeyPressed(keyboardAssignment.RightStick.Value); }
+            get { return IsKeyReleased(keyboardAssignment.RightStick); }
         }
 
         public bool RightShoulder
         {
-            get { return WasKeyPressed(keyboardAssignment.RightShoulder.Value); }
+            get { return IsKeyReleased(keyboardAssignment.RightShoulder); }
         }
 
         public bool LeftShoulder
         {
-            get { return WasKeyPressed(keyboardAssignment.LeftShoulder.Value); }
+            get { return IsKeyReleased(keyboardAssignment.LeftShoulder); }
         }
 
         public float LeftStickX
         {
-            get { return GetInputAmountForKeyboardRange(keyboardAssignment.LeftThumbstickLeft.Value, keyboardAssignment.LeftThumbstickRight.Value); }
+            get { return GetThumbstickAxisAmountForKeys(keyboardAssignment.LeftThumbstickLeft, keyboardAssignment.LeftThumbstickRight); }
         }
 
         public float LeftStickY
         {
-            get { return GetInputAmountForKeyboardRange(keyboardAssignment.LeftThumbstickUp.Value, keyboardAssignment.LeftThumbstickDown.Value); }
+            get { return GetThumbstickAxisAmountForKeys(keyboardAssignment.LeftThumbstickDown, keyboardAssignment.LeftThumbstickUp); }
         }
 
         public bool LeftThumbstickLeft
         {
-            get { return WasKeyPressed(keyboardAssignment.LeftThumbstickLeft.Value); }
+            get { return IsKeyReleased(keyboardAssignment.LeftThumbstickLeft); }
         }
 
         public bool LeftThumbstickRight
         {
-            get { return WasKeyPressed(keyboardAssignment.LeftThumbstickRight.Value); }
+            get { return IsKeyReleased(keyboardAssignment.LeftThumbstickRight); }
         }
 
         public bool LeftThumbstickUp
         {
-            get { return WasKeyPressed(keyboardAssignment.LeftThumbstickUp.Value); }
+            get { return IsKeyReleased(keyboardAssignment.LeftThumbstickUp); }
         }
 
         public bool LeftThumbstickDown
         {
-            get { return WasKeyPressed(keyboardAssignment.LeftThumbstickDown.Value); }
+            get { return IsKeyReleased(keyboardAssignment.LeftThumbstickDown); }
         }
 
         public float RightStickX
         {
-            get { return GetInputAmountForKeyboardRange(keyboardAssignment.RightThumbstickLeft.Value, keyboardAssignment.RightThumbstickRight.Value); }
+            get { return GetThumbstickAxisAmountForKeys(keyboardAssignment.RightThumbstickLeft, keyboardAssignment.RightThumbstickRight); }
         }
 
         public float RightStickY
         {
-            get { return GetInputAmountForKeyboardRange(keyboardAssignment.RightThumbstickUp.Value, keyboardAssignment.RightThumbstickDown.Value); }
+            get { return GetThumbstickAxisAmountForKeys(keyboardAssignment.RightThumbstickDown, keyboardAssignment.RightThumbstickUp); }
         }
 
         public bool RightThumbstickLeft
         {
-            get { return WasKeyPressed(keyboardAssignment.RightThumbstickLeft.Value); }
+            get { return IsKeyReleased(keyboardAssignment.RightThumbstickLeft); }
         }
 
         public bool RightThumbstickRight
         {
-            get { return WasKeyPressed(keyboardAssignment.RightThumbstickRight.Value); }
+            get { return IsKeyReleased(keyboardAssignment.RightThumbstickRight); }
         }
 
         public bool RightThumbstickUp
         {
-            get { return WasKeyPressed(keyboardAssignment.RightThumbstickUp.Value); }
+            get { return IsKeyReleased(keyboardAssignment.RightThumbstickUp); }
         }
 
         public bool RightThumbstickDown
         {
-            get { return WasKeyPressed(keyboardAssignment.RightThumbstickDown.Value); }
+            get { return IsKeyReleased(keyboardAssignment.RightThumbstickDown); }
         }
 
         public float LeftTrigger
         {
-            get { return (currentKeyboardState.IsKeyDown(keyboardAssignment.LeftTrigger.Value) ? 1f : 0f); }
+            get { return (currentKeyboardState.IsKeyDown(keyboardAssignment.LeftTrigger) ? 1f : 0f); }
         }
 
         public float RightTrigger
         {
-            get { return (currentKeyboardState.IsKeyDown(keyboardAssignment.RightTrigger.Value) ? 1f : 0f); }
+            get { return (currentKeyboardState.IsKeyDown(keyboardAssignment.RightTrigger) ? 1f : 0f); }
         }
 
         public bool DPadUp
         {
-            get { return (keyboardAssignment.DPadUp == null ? false : IsKeyDown(keyboardAssignment.DPadUp.Value)); }
+            get { return IsKeyDown(keyboardAssignment.DPadUp); }
         }
 
         public bool DPadDown
         {
-            get { return (keyboardAssignment.DPadDown == null ? false : IsKeyDown(keyboardAssignment.DPadDown.Value)); }
+            get { return IsKeyDown(keyboardAssignment.DPadDown); }
         }
 
         public bool DPadLeft
         {
-            get { return (keyboardAssignment.DPadLeft == null ? false : IsKeyDown(keyboardAssignment.DPadLeft.Value)); }
+            get { return IsKeyDown(keyboardAssignment.DPadLeft); }
         }
 
         public bool DPadRight
         {
-            get { return (keyboardAssignment.DPadRight == null ? false : IsKeyDown(keyboardAssignment.DPadRight.Value)); }
+            get { return IsKeyDown(keyboardAssignment.DPadRight); }
         }
-
-        public KeyboardAssignment KeyboardAssignment
-        {
-            get { return this.keyboardAssignment; }
-            set { this.keyboardAssignment = value; }
-        }
-
-        public void UpdateKeyboardState(ref KeyboardState keyboardState)
-        {
-            previousKeyboardState = currentKeyboardState;
-            currentKeyboardState = keyboardState;
-        }
-
-        public void UpdateGamePadState(ref GamePadState gamePadState)
-        {
-            ;
-        }
-
-        #if !XBOX
-        public void UpdateMouseState(ref MouseState mouseState)
-        {
-            ;
-        }
-        #endif
         #endregion
-
-        private float GetInputAmountForKeyboardRange(Keys negativeKey, Keys positiveKey)
-        {
-            float result = 0f;
-
-            if (currentKeyboardState.IsKeyDown(negativeKey))
-                result = -1f;
-            else if (currentKeyboardState.IsKeyDown(positiveKey))
-                result = 1f;
-
-            return result;
-        }
-
-        private bool IsKeyDown(Keys key)
-        {
-            return (currentKeyboardState.IsKeyDown(key));
-        }
-
-        private bool IsHoldingKey(Keys key)
-        {
-            return (currentKeyboardState.IsKeyDown(key) && previousKeyboardState.IsKeyDown(key));
-        }
-
-        private bool WasKeyPressed(Keys key)
-        {
-            return (currentKeyboardState.IsKeyDown(key) && previousKeyboardState.IsKeyUp(key));
-        }
-
-        private bool HasReleasedKey(Keys key)
-        {
-            return (currentKeyboardState.IsKeyUp(key) && previousKeyboardState.IsKeyDown(key));
-        }
     }
 }
