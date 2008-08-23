@@ -9,29 +9,29 @@ namespace ThraeX.Input.GameControllers
     // to be done by default...
     public struct KeyboardAssignment
     {
-        public Keys A;
-        public Keys B;
-        public Keys X;
-        public Keys Y;
-        public Keys LeftTrigger;
-        public Keys RightTrigger;
-        public Keys LeftShoulder;
-        public Keys RightShoulder;
-        public Keys LeftStick;
-        public Keys RightStick;
-        public Keys Start;
-        public Keys Back;
-        public Keys LeftThumbstickUp;
-        public Keys LeftThumbstickDown;
-        public Keys LeftThumbstickLeft;
-        public Keys LeftThumbstickRight;
-        public Keys RightThumbstickUp;
-        public Keys RightThumbstickDown;
-        public Keys RightThumbstickLeft;
-        public Keys RightThumbstickRight;
-        public Keys DPadUp;
-        public Keys DPadDown;
-        public Keys DPadLeft;
-        public Keys DPadRight;
+        public Keys? A;
+        public Keys? B;
+        public Keys? X;
+        public Keys? Y;
+        public Keys? LeftTrigger;
+        public Keys? RightTrigger;
+        public Keys? LeftShoulder;
+        public Keys? RightShoulder;
+        public Keys? LeftStick;
+        public Keys? RightStick;
+        public Keys? Start;
+        public Keys? Back;
+        public Keys? LeftThumbstickUp;
+        public Keys? LeftThumbstickDown;
+        public Keys? LeftThumbstickLeft;
+        public Keys? LeftThumbstickRight;
+        public Keys? RightThumbstickUp;
+        public Keys? RightThumbstickDown;
+        public Keys? RightThumbstickLeft;
+        public Keys? RightThumbstickRight;
+        public Keys? DPadUp;
+        public Keys? DPadDown;
+        public Keys? DPadLeft;
+        public Keys? DPadRight;
     }
 }

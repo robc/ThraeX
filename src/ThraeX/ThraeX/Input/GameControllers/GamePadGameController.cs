@@ -39,142 +39,142 @@ namespace ThraeX.Input.GameControllers
 
         public bool A
         {
-            get { return WasPadButtonPressed(Buttons.A) || WasKeyPressed(keyboardAssignment.A); }
+            get { return WasPadButtonPressed(Buttons.A) || WasKeyPressed(keyboardAssignment.A.Value); }
         }
 
         public bool B
         {
-            get { return WasPadButtonPressed(Buttons.B) || WasKeyPressed(keyboardAssignment.B); }
+            get { return WasPadButtonPressed(Buttons.B) || WasKeyPressed(keyboardAssignment.B.Value); }
         }
 
         public bool X
         {
-            get { return WasPadButtonPressed(Buttons.X) || WasKeyPressed(keyboardAssignment.X); }
+            get { return WasPadButtonPressed(Buttons.X) || WasKeyPressed(keyboardAssignment.X.Value); }
         }
 
         public bool Y
         {
-            get { return WasPadButtonPressed(Buttons.Y) || WasKeyPressed(keyboardAssignment.Y); }
+            get { return WasPadButtonPressed(Buttons.Y) || WasKeyPressed(keyboardAssignment.Y.Value); }
         }
 
         public bool Start
         {
-            get { return WasPadButtonPressed(Buttons.Start) || WasKeyPressed(keyboardAssignment.Start); }
+            get { return WasPadButtonPressed(Buttons.Start) || WasKeyPressed(keyboardAssignment.Start.Value); }
         }
 
         public bool Back
         {
-            get { return WasPadButtonPressed(Buttons.Back) || WasKeyPressed(keyboardAssignment.Back); }
+            get { return WasPadButtonPressed(Buttons.Back) || WasKeyPressed(keyboardAssignment.Back.Value); }
         }
 
         public bool LeftStick
         {
-            get { return WasPadButtonPressed(Buttons.LeftStick) || WasKeyPressed(keyboardAssignment.LeftStick); }
+            get { return WasPadButtonPressed(Buttons.LeftStick) || WasKeyPressed(keyboardAssignment.LeftStick.Value); }
         }
 
         public bool RightStick
         {
-            get { return WasPadButtonPressed(Buttons.RightStick) || WasKeyPressed(keyboardAssignment.RightStick); }
+            get { return WasPadButtonPressed(Buttons.RightStick) || WasKeyPressed(keyboardAssignment.RightStick.Value); }
         }
 
         public bool RightShoulder
         {
-            get { return WasPadButtonPressed(Buttons.RightShoulder) || WasKeyPressed(keyboardAssignment.RightShoulder); }
+            get { return WasPadButtonPressed(Buttons.RightShoulder) || WasKeyPressed(keyboardAssignment.RightShoulder.Value); }
         }
 
         public bool LeftShoulder
         {
-            get { return WasPadButtonPressed(Buttons.LeftShoulder) || WasKeyPressed(keyboardAssignment.LeftShoulder); }
+            get { return WasPadButtonPressed(Buttons.LeftShoulder) || WasKeyPressed(keyboardAssignment.LeftShoulder.Value); }
         }
 
         public float LeftStickX
         {
-            get { return ReadStickAxis(currentGamePadState.ThumbSticks.Left.X, keyboardAssignment.LeftThumbstickLeft, keyboardAssignment.LeftThumbstickRight); }
+            get { return ReadStickAxis(currentGamePadState.ThumbSticks.Left.X, keyboardAssignment.LeftThumbstickLeft.Value, keyboardAssignment.LeftThumbstickRight.Value); }
         }
 
         public float LeftStickY
         {
-            get { return ReadStickAxis(currentGamePadState.ThumbSticks.Left.Y, keyboardAssignment.LeftThumbstickDown, keyboardAssignment.LeftThumbstickUp); }
+            get { return ReadStickAxis(currentGamePadState.ThumbSticks.Left.Y, keyboardAssignment.LeftThumbstickDown.Value, keyboardAssignment.LeftThumbstickUp.Value); }
         }
 
         public bool LeftThumbstickLeft
         {
-            get { return WasPadButtonPressed(Buttons.LeftThumbstickLeft) || WasKeyPressed(keyboardAssignment.LeftThumbstickLeft); }
+            get { return WasPadButtonPressed(Buttons.LeftThumbstickLeft) || WasKeyPressed(keyboardAssignment.LeftThumbstickLeft.Value); }
         }
 
         public bool LeftThumbstickRight
         {
-            get { return WasPadButtonPressed(Buttons.LeftThumbstickRight) || WasKeyPressed(keyboardAssignment.LeftThumbstickRight); }
+            get { return WasPadButtonPressed(Buttons.LeftThumbstickRight) || WasKeyPressed(keyboardAssignment.LeftThumbstickRight.Value); }
         }
 
         public bool LeftThumbstickUp
         {
-            get { return WasPadButtonPressed(Buttons.LeftThumbstickUp) || WasKeyPressed(keyboardAssignment.LeftThumbstickUp); }
+            get { return WasPadButtonPressed(Buttons.LeftThumbstickUp) || WasKeyPressed(keyboardAssignment.LeftThumbstickUp.Value); }
         }
 
         public bool LeftThumbstickDown
         {
-            get { return WasPadButtonPressed(Buttons.LeftThumbstickDown) || WasKeyPressed(keyboardAssignment.LeftThumbstickDown); }
+            get { return WasPadButtonPressed(Buttons.LeftThumbstickDown) || WasKeyPressed(keyboardAssignment.LeftThumbstickDown.Value); }
         }
 
         public float RightStickX
         {
-            get { return ReadStickAxis(currentGamePadState.ThumbSticks.Right.X, keyboardAssignment.RightThumbstickLeft, keyboardAssignment.RightThumbstickRight); }
+            get { return ReadStickAxis(currentGamePadState.ThumbSticks.Right.X, keyboardAssignment.RightThumbstickLeft.Value, keyboardAssignment.RightThumbstickRight.Value); }
         }
 
         public float RightStickY
         {
-            get { return ReadStickAxis(currentGamePadState.ThumbSticks.Right.Y, keyboardAssignment.RightThumbstickDown, keyboardAssignment.RightThumbstickUp); }
+            get { return ReadStickAxis(currentGamePadState.ThumbSticks.Right.Y, keyboardAssignment.RightThumbstickDown.Value, keyboardAssignment.RightThumbstickUp.Value); }
         }
 
         public bool RightThumbstickLeft
         {
-            get { return WasPadButtonPressed(Buttons.RightThumbstickLeft) || WasKeyPressed(keyboardAssignment.RightThumbstickLeft); }
+            get { return WasPadButtonPressed(Buttons.RightThumbstickLeft) || WasKeyPressed(keyboardAssignment.RightThumbstickLeft.Value); }
         }
 
         public bool RightThumbstickRight
         {
-            get { return WasPadButtonPressed(Buttons.RightThumbstickRight) || WasKeyPressed(keyboardAssignment.RightThumbstickRight); }
+            get { return WasPadButtonPressed(Buttons.RightThumbstickRight) || WasKeyPressed(keyboardAssignment.RightThumbstickRight.Value); }
         }
 
         public bool RightThumbstickUp
         {
-            get { return WasPadButtonPressed(Buttons.RightThumbstickUp) || WasKeyPressed(keyboardAssignment.RightThumbstickUp); }
+            get { return WasPadButtonPressed(Buttons.RightThumbstickUp) || WasKeyPressed(keyboardAssignment.RightThumbstickUp.Value); }
         }
 
         public bool RightThumbstickDown
         {
-            get { return WasPadButtonPressed(Buttons.RightThumbstickDown) || WasKeyPressed(keyboardAssignment.RightThumbstickDown); }
+            get { return WasPadButtonPressed(Buttons.RightThumbstickDown) || WasKeyPressed(keyboardAssignment.RightThumbstickDown.Value); }
         }
 
         public float LeftTrigger
         {
-            get { return ReadTriggerAxis(currentGamePadState.Triggers.Left, keyboardAssignment.LeftTrigger); }
+            get { return ReadTriggerAxis(currentGamePadState.Triggers.Left, keyboardAssignment.LeftTrigger.Value); }
         }
 
         public float RightTrigger
         {
-            get { return ReadTriggerAxis(currentGamePadState.Triggers.Right, keyboardAssignment.RightTrigger); }
+            get { return ReadTriggerAxis(currentGamePadState.Triggers.Right, keyboardAssignment.RightTrigger.Value); }
         }
 
         public bool DPadUp
         {
-            get { return WasPadButtonPressed(Buttons.DPadUp) || WasKeyPressed(keyboardAssignment.DPadUp); }
+            get { return WasPadButtonPressed(Buttons.DPadUp) || WasKeyPressed(keyboardAssignment.DPadUp.Value); }
         }
 
         public bool DPadDown
         {
-            get { return WasPadButtonPressed(Buttons.DPadDown) || WasKeyPressed(keyboardAssignment.DPadDown); }
+            get { return WasPadButtonPressed(Buttons.DPadDown) || WasKeyPressed(keyboardAssignment.DPadDown.Value); }
         }
 
         public bool DPadLeft
         {
-            get { return WasPadButtonPressed(Buttons.DPadLeft) || WasKeyPressed(keyboardAssignment.DPadLeft); }
+            get { return WasPadButtonPressed(Buttons.DPadLeft) || WasKeyPressed(keyboardAssignment.DPadLeft.Value); }
         }
 
         public bool DPadRight
         {
-            get { return WasPadButtonPressed(Buttons.DPadRight) || WasKeyPressed(keyboardAssignment.DPadRight); }
+            get { return WasPadButtonPressed(Buttons.DPadRight) || WasKeyPressed(keyboardAssignment.DPadRight.Value); }
         }
 
         public void UpdateKeyboardState(ref KeyboardState keyboardState)
