@@ -10,7 +10,7 @@ namespace UnitTests.ThraeX.Input
     public class VirtualGameControllerFactoryTest
     {
         [Fact]
-        public void ShouldReturnGamePadControllerWhenGetNewGameControllerInstanceIsCalledKeyboardAssignmentIsPassedIn()
+        public void ShouldReturnGamePadControllerWithKeyboardAssignmentAssignedWhenGetNewGameControllerInstanceIsCalledAndKeyboardAssignmentIsPassedIn()
         {
             KeyboardAssignment keyboardAssignment = new KeyboardAssignment();
             VirtualGameControllerFactory virtualGameControllerFactory = new VirtualGameControllerFactory();
@@ -25,6 +25,24 @@ namespace UnitTests.ThraeX.Input
         {
             VirtualGameControllerFactory virtualGameControllerFactory = new VirtualGameControllerFactory();
             Assert.IsType<GamePadGameController>(virtualGameControllerFactory.GetNewGameControllerInstance(GamePadType.GamePad));
+        }
+
+        [Fact]
+        public void ShouldReturnArcadeStickControllerWithKeyboardAssignmentAssignedWhenGetNewGameControllerInstanceIsCalledForArcadeStickAndKeyboardAssignmentIsPassedIn()
+        {
+            KeyboardAssignment keyboardAssignment = new KeyboardAssignment();
+            VirtualGameControllerFactory virtualGameControllerFactory = new VirtualGameControllerFactory();
+
+            IVirtualGameController instantiatedGameController = virtualGameControllerFactory.GetNewGameControllerInstance(GamePadType.ArcadeStick, keyboardAssignment);
+            Assert.IsType<ArcadeStickGameController>(instantiatedGameController);
+            Assert.Equal<KeyboardAssignment>(keyboardAssignment, instantiatedGameController.KeyboardAssignment);
+        }
+
+        [Fact]
+        public void ShouldReturnArcadeStickControllerWithoutKeyboardAssignmentWhenGetNewGameControllerInstanceIsCalledForArcadeStick()
+        {
+            VirtualGameControllerFactory virtualGameControllerFactory = new VirtualGameControllerFactory();
+            Assert.IsType<ArcadeStickGameController>(virtualGameControllerFactory.GetNewGameControllerInstance(GamePadType.ArcadeStick));
         }
     }
 }

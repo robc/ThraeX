@@ -12,7 +12,7 @@ namespace ThraeX.Input
     {
         #region Constant Reference Variables
         private readonly IVirtualGameController NULL_CONTROLLER = new NullGameController();
-        private static readonly GamePadType[] DEFAULT_GAMEPAD_TYPES = { GamePadType.GamePad, GamePadType.ArcadeStick };
+        private static readonly GamePadType[] DEFAULT_GAMEPAD_TYPES = { GamePadType.GamePad };
         #endregion
 
         private IVirtualGameControllerFactory virtualControllerFactory;

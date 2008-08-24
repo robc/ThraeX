@@ -34,7 +34,17 @@ namespace ThraeX.Input
 
         public IVirtualGameController GetNewGameControllerInstance(GamePadType gamePadType)
         {
-            return new GamePadGameController();
+            IVirtualGameController virtualGameController;
+            switch (gamePadType)
+            {
+                case GamePadType.ArcadeStick:
+                    virtualGameController = new ArcadeStickGameController();
+                    break;
+                default:
+                    virtualGameController = new GamePadGameController();
+                    break;
+            }
+            return virtualGameController;
         }
 
         public IVirtualGameController GetNewKeyboardOnlyControllerInstance(KeyboardAssignment keyboardAssignment)
