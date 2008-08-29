@@ -88,6 +88,8 @@
     <Compile Include="Input\VirtualControllerService.cs" />
     <Compile Include="Input\VirtualGameControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Storage\IStorageService.cs" />
+    <Compile Include="Storage\XnaStorageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
