@@ -32,7 +32,7 @@ namespace ThraeX.Storage
 
         public void SubmitStorageRequest()
         {
-            if (storageRequestState == StorageRequestState.NO_REQUEST && storageDevice == null && Guide.IsVisible)
+            if (storageRequestState == StorageRequestState.NO_REQUEST && storageDevice == null && !Guide.IsVisible)
             {
                 storageRequestState = StorageRequestState.WAITING_FOR_STORAGE_DEVICE_SELECTION;
                 this.storageDevice = null;
@@ -61,9 +61,27 @@ namespace ThraeX.Storage
         {
             if (storageContainer == null)
                 throw new InvalidOperationException("Unable to close a null storageContainer");
-            
+
             if (!storageContainer.IsDisposed)
+            {
                 storageContainer.Dispose();
+                storageContainer = null;
+            }
+        }
+
+        public bool IsFilePresentInStorage(String filename)
+        {
+            if (!StorageAvailable)
+                throw new InvalidOperationException("Cannot check for presence of a file when no StorageDevice has been selected");
+
+            if (storageContainer == null)
+                storageContainer = storageDevice.OpenContainer(title);
+
+            String filePath = Path.Combine(storageContainer.Path, filename);
+            bool result =  File.Exists(filePath);
+
+            EndStorageOperation();
+            return result;
         }
         #endregion
 
@@ -71,7 +89,7 @@ namespace ThraeX.Storage
         private void SelectDefaultUserStorageDevice(IAsyncResult result)
         {
             storageDevice = Guide.EndShowStorageDeviceSelector(result);
-            if (storageDevice == null) storageRequestState = StorageRequestState.REQUEST_CANCELLED;
+            if (storageDevice == null || !storageDevice.IsConnected) storageRequestState = StorageRequestState.REQUEST_CANCELLED;
         }
         #endregion
     }

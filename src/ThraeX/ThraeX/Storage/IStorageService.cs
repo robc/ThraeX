@@ -17,5 +17,6 @@ namespace ThraeX.Storage
 
         FileStream GetFileStreamForStorageOperation(String filename, FileMode fileMode);
         void EndStorageOperation();
+        bool IsFilePresentInStorage(String filename);
     }
 }
