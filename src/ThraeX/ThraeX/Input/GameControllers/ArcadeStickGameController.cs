@@ -1,14 +1,9 @@
-﻿using System;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 
 namespace ThraeX.Input.GameControllers
 {
     public class ArcadeStickGameController : AbstractGameController, IVirtualGameController
     {
-        public ArcadeStickGameController() : base()
-        { }
-
         #region IVirtualGameController Members
         public bool A
         {
@@ -46,10 +41,9 @@ namespace ThraeX.Input.GameControllers
             {
                 if (IsButtonDown(Buttons.DPadLeft, keyboardAssignment.DPadLeft))
                     return -1f;
-                else if (IsButtonDown(Buttons.DPadRight, keyboardAssignment.DPadRight))
+                if (IsButtonDown(Buttons.DPadRight, keyboardAssignment.DPadRight))
                     return 1f;
-                else
-                    return 0f;
+                return 0f;
             }
         }
 
@@ -59,10 +53,10 @@ namespace ThraeX.Input.GameControllers
             {
                 if (IsButtonDown(Buttons.DPadDown, keyboardAssignment.DPadDown))
                     return -1f;
-                else if (IsButtonDown(Buttons.DPadUp, keyboardAssignment.DPadUp))
+                if (IsButtonDown(Buttons.DPadUp, keyboardAssignment.DPadUp))
                     return 1f;
-                else
-                    return 0f;
+
+                return 0f;
             }
         }
 

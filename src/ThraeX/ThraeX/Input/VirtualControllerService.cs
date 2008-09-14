@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using ThraeX.Input.GameControllers;
@@ -15,13 +13,13 @@ namespace ThraeX.Input
         private static readonly GamePadType[] DEFAULT_GAMEPAD_TYPES = { GamePadType.GamePad };
         #endregion
 
-        private IVirtualGameControllerFactory virtualControllerFactory;
+        private readonly IVirtualGameControllerFactory virtualControllerFactory;
         private bool useDPadAsLeftStick;
 
+        private readonly GamePadType[] gamePadTypes;
         private IVirtualGameController[] attachedControllers;
         private KeyboardOnlyVirtualGameController[] keyboardControllers;
         private KeyboardAssignment? [] keyboardAssignments;
-        private GamePadType[] gamePadTypes;
 
         public VirtualControllerService(IVirtualGameControllerFactory virtualControllerFactory)
             : this(virtualControllerFactory, DEFAULT_GAMEPAD_TYPES)
@@ -88,8 +86,8 @@ namespace ThraeX.Input
 
             for (int player = 0; player <= (int)PlayerIndex.Four; player++)
             {
-                propertyInfo = attachedControllers[(int)player].GetType().GetProperty(button.ToString());
-                pressed |= (bool)propertyInfo.GetValue(attachedControllers[(int)player], null);
+                propertyInfo = attachedControllers[player].GetType().GetProperty(button.ToString());
+                pressed |= (bool)propertyInfo.GetValue(attachedControllers[player], null);
 
                 if (pressed) break;
             }
@@ -113,7 +111,6 @@ namespace ThraeX.Input
         #if !XBOX
         public void UpdateMouseState(ref MouseState mouseState)
         {
-            ;
         }
         #endif
 
@@ -134,8 +131,8 @@ namespace ThraeX.Input
 
         public bool UseDpadAsLeftStick
         {
-            get { return this.useDPadAsLeftStick; }
-            set { this.useDPadAsLeftStick = value; }
+            get { return useDPadAsLeftStick; }
+            set { useDPadAsLeftStick = value; }
         }
 
         public void DetachController(PlayerIndex player)
@@ -166,14 +163,13 @@ namespace ThraeX.Input
         {
             for (int padTypeNumber = 0; padTypeNumber < gamePadTypes.Length; padTypeNumber++)
             {
-                if (gamePadTypes[padTypeNumber] == gamePadType)
-                {
-                    #if DEBUG
-                    Console.WriteLine("Got a match on GamePadType {0} at index {1}", gamePadType, padTypeNumber);
-                    #endif
+                if (gamePadTypes[padTypeNumber] != gamePadType) continue;
+                
+                #if DEBUG
+                Console.WriteLine("Got a match on GamePadType {0} at index {1}", gamePadType, padTypeNumber);
+                #endif
 
-                    return true;
-                }
+                return true;
             }
 
             return false;

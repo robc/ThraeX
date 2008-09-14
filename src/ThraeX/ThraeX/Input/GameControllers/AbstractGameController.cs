@@ -13,9 +13,6 @@ namespace ThraeX.Input.GameControllers
         protected KeyboardState previousKeyboardState;
         protected KeyboardAssignment keyboardAssignment;
 
-        public AbstractGameController()
-        { }
-
         public KeyboardAssignment KeyboardAssignment
         {
             get { return this.keyboardAssignment; }

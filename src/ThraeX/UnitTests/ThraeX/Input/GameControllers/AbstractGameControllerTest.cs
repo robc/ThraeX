@@ -1,27 +1,56 @@
 ﻿using Xunit;
-using System;
-using System.Collections.Generic;
 using ThraeX.Input.GameControllers;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace UnitTests.ThraeX.Input.GameControllers
 {
-    public class AbstractGameControllerTest
+    public class AbstractGameControllerTest : AbstractGameController
     {
-        private static readonly Object[] KEYS_TO_TEST = { Keys.A };
+        readonly Keys[] currentKeysList = { Keys.A, Keys.C };
+        readonly Keys[] previousKeysList = { Keys.A, Keys.B };
 
-        // Currently we fail because we aren't cleanly invoking the protected method
-        // What's the best way to invoke a protected method in this case?
+        public AbstractGameControllerTest()
+        {
+            currentKeyboardState = new KeyboardState(currentKeysList);
+            previousKeyboardState = new KeyboardState(previousKeysList);
+        }
+
         [Fact]
         public void IsKeyDownShouldBeFalseIfKeyIsNotDown()
         {
-            KeyboardState keyboardState = new KeyboardState();
-            AbstractGameController gameController = new AbstractGameController();
-            gameController.UpdateKeyboardState(ref keyboardState);
+            Assert.False(IsKeyDown(Keys.B));
+        }
 
-            Type abstractGameControllerType = gameController.GetType();
-            Assert.False((bool)(abstractGameControllerType.GetMethod("IsKeyDown", System.Reflection.BindingFlags.NonPublic).Invoke(gameController, KEYS_TO_TEST)));
+        [Fact]
+        public void IsKeyDownShouldBeTrueIfKeyIsDown()
+        {
+            Assert.True(IsKeyDown(Keys.A));
+        }
+
+        [Fact]
+        public void IsKeyHeldDownShouldBeTrueIfKeyIsDownForBothTheCurrentAndPreviousStates()
+        {
+            Assert.True(IsKeyHeldDown(Keys.A));
+        }
+
+        [Fact]
+        public void IsKeyHeldDownShouldBeFalseIfKeyIsNotDownForEitherState()
+        {
+            Assert.False(IsKeyHeldDown(Keys.B));
+            Assert.False(IsKeyHeldDown(Keys.C));
+        }
+
+        [Fact]
+        public void IsKeyReleasedShouldBeTrueIfKeyIsDownOnPreviousAndNotOnCurrent()
+        {
+            Assert.True(IsKeyReleased(Keys.B));
+        }
+
+        [Fact]
+        public void IsKeyReleasedShouldBeFalseIfKeyIsNotDownOnPreviousAndNotOnCurrent()
+        {
+            Assert.False(IsKeyReleased(Keys.C));
+            Assert.False(IsKeyReleased(Keys.A));
         }
     }
 }

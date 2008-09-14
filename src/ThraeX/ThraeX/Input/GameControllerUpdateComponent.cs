@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using ThraeX.Input.GameControllers;
 
 namespace ThraeX.Input
 {
@@ -55,10 +51,9 @@ namespace ThraeX.Input
             UpdateAttachedController(PlayerIndex.Three);
             UpdateAttachedController(PlayerIndex.Four);
 
-            GamePadState gamePadState;
             for (int playerIndex = 0; playerIndex < (int)PlayerIndex.Four; playerIndex++)
             {
-                gamePadState = GamePad.GetState((PlayerIndex)playerIndex);
+                GamePadState gamePadState = GamePad.GetState((PlayerIndex)playerIndex);
                 virtualControllerService.UpdateGamePadState(ref gamePadState, (PlayerIndex)playerIndex);
             }
 

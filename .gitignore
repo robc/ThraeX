@@ -6,3 +6,5 @@ src/ThraeX/ThraeX/Content/bin/**
 src/ThraeX/ThraeX/Content/obj/**
 src/ThraeX/UnitTests/bin/**
 src/ThraeX/UnitTests/obj/**
+src/ThraeX/ThraeX.4.1.resharper.user
+src/ThraeX/_ReSharper.ThraeX/**
