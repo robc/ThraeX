@@ -21,6 +21,8 @@ namespace ThraeX.Input
         private KeyboardOnlyVirtualGameController[] keyboardControllers;
         private KeyboardAssignment? [] keyboardAssignments;
 
+        private PlayerIndex? triggeringPlayer;
+
         public VirtualControllerService(IVirtualGameControllerFactory virtualControllerFactory)
             : this(virtualControllerFactory, DEFAULT_GAMEPAD_TYPES)
         { }
@@ -81,6 +83,7 @@ namespace ThraeX.Input
 
         public bool WasButtonPressed(Buttons button)
         {
+            triggeringPlayer = null;
             bool pressed = false;
             PropertyInfo propertyInfo;
 
@@ -89,10 +92,19 @@ namespace ThraeX.Input
                 propertyInfo = attachedControllers[player].GetType().GetProperty(button.ToString());
                 pressed |= (bool)propertyInfo.GetValue(attachedControllers[player], null);
 
-                if (pressed) break;
+                if (pressed)
+                {
+                    triggeringPlayer = (PlayerIndex)player;
+                    break;
+                }
             }
 
             return pressed;
+        }
+
+        public PlayerIndex? TriggeringPlayer
+        {
+            get { return triggeringPlayer; }
         }
 
         public void UpdateKeyboardState(ref KeyboardState keyboardState)
