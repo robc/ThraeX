@@ -1,5 +1,6 @@
 *.suo
 *.xnb
+*.user
 src/ThraeX/ThraeX/bin/**
 src/ThraeX/ThraeX/obj/**
 src/ThraeX/ThraeX/Content/bin/**

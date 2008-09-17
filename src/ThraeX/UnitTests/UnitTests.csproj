@@ -59,9 +59,9 @@
     <Compile Include="ThraeX\Input\VirtualGameControllerFactoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ThraeX\ThraeX.csproj">
+    <ProjectReference Include="..\ThraeX\ThraeX_Windows.csproj">
       <Project>{40ACEDED-A97D-44AF-8BC0-076785630FDF}</Project>
-      <Name>ThraeX</Name>
+      <Name>ThraeX_Windows</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
