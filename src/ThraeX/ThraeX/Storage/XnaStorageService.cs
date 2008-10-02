@@ -39,7 +39,7 @@ namespace ThraeX.Storage
         {
             #if XBOX
             guideIsVisible = Guide.IsVisible;
-            #else
+            #endif
 
             if (storageRequestState == StorageRequestState.NO_REQUEST && storageDevice == null && !guideIsVisible)
                 StartStorageRequestAction();
