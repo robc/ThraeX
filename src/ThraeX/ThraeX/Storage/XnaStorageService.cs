@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Storage;
 
@@ -8,7 +7,13 @@ namespace ThraeX.Storage
 {
     public class XnaStorageService : IStorageService
     {
-        private String title;
+        // When running on the Xbox, this flag is set to the value of the Guide.IsVisible property.
+        // On the PC, we are not going to use the Guide, so this will simulate it always being set.
+        // ReSharper disable ConvertToConstant
+        private bool guideIsVisible = true;
+        // ReSharper restore ConvertToConstant
+        
+        private readonly String title;
         private StorageDevice storageDevice;
         private StorageContainer storageContainer;
         private StorageRequestState storageRequestState;
@@ -22,32 +27,29 @@ namespace ThraeX.Storage
         #region IStorageService Members
         public StorageRequestState RequestStatus
         {
-            get { return this.storageRequestState; }
+            get { return storageRequestState; }
         }
 
         public bool StorageAvailable
         {
-            get { return (this.storageDevice != null && this.storageDevice.IsConnected); }
+            get { return (storageDevice != null && storageDevice.IsConnected); }
         }
 
         public void SubmitStorageRequest()
         {
-            if (storageRequestState == StorageRequestState.NO_REQUEST && storageDevice == null && !Guide.IsVisible)
-            {
-                storageRequestState = StorageRequestState.WAITING_FOR_STORAGE_DEVICE_SELECTION;
-                this.storageDevice = null;
-                this.storageContainer = null;
-                Guide.BeginShowStorageDeviceSelector(new AsyncCallback(SelectDefaultUserStorageDevice), this);
-            }
+            #if XBOX
+            guideIsVisible = Guide.IsVisible;
+            #else
+
+            if (storageRequestState == StorageRequestState.NO_REQUEST && storageDevice == null && !guideIsVisible)
+                StartStorageRequestAction();
             else if (storageRequestState == StorageRequestState.WAITING_FOR_STORAGE_DEVICE_SELECTION)
-            {
                 throw new InvalidOperationException("Cannot Submit a Storage Device request when we have a request pending.");
-            }
         }
 
         public void ResetStorageRequest()
         {
-            this.storageRequestState = StorageRequestState.NO_REQUEST;
+            storageRequestState = StorageRequestState.NO_REQUEST;
         }
 
         public FileStream GetFileStreamForStorageOperation(string filename, FileMode fileMode)
@@ -86,6 +88,14 @@ namespace ThraeX.Storage
         #endregion
 
         #region Private Actions
+        private void StartStorageRequestAction()
+        {
+            storageRequestState = StorageRequestState.WAITING_FOR_STORAGE_DEVICE_SELECTION;
+            storageDevice = null;
+            storageContainer = null;
+            Guide.BeginShowStorageDeviceSelector(new AsyncCallback(SelectDefaultUserStorageDevice), this);
+        }
+
         private void SelectDefaultUserStorageDevice(IAsyncResult result)
         {
             storageDevice = Guide.EndShowStorageDeviceSelector(result);
