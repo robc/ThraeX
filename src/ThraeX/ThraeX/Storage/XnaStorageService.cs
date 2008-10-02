@@ -10,7 +10,7 @@ namespace ThraeX.Storage
         // When running on the Xbox, this flag is set to the value of the Guide.IsVisible property.
         // On the PC, we are not going to use the Guide, so this will simulate it always being set.
         // ReSharper disable ConvertToConstant
-        private bool guideIsVisible = true;
+        private bool guideIsVisible = false;
         // ReSharper restore ConvertToConstant
         
         private readonly String title;
