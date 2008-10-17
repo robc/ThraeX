@@ -51,9 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ThraeX\Input\GameControllers\AbstractGameControllerTest.cs" />
     <Compile Include="ThraeX\Input\GameInputMapperTest.cs" />
-    <Compile Include="ThraeX\Input\VirtualGameControllerFactoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ThraeX\ThraeX_Windows.csproj">

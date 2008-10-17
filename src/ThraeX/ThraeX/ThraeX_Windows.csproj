@@ -78,19 +78,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Input\GameControllers\AbstractGameController.cs" />
-    <Compile Include="Input\GameControllers\ArcadeStickGameController.cs" />
-    <Compile Include="Input\GameControllers\GamePadGameController.cs" />
-    <Compile Include="Input\GameControllers\IVirtualGameController.cs" />
     <Compile Include="Input\GameControllers\KeyboardAssignment.cs" />
-    <Compile Include="Input\GameControllers\KeyboardOnlyVirtualGameController.cs" />
-    <Compile Include="Input\GameControllers\NullGameController.cs" />
     <Compile Include="Input\GameControllerUpdateComponent.cs" />
     <Compile Include="Input\GameInputMapper.cs" />
-    <Compile Include="Input\IVirtualGameControllerFactory.cs" />
-    <Compile Include="Input\IVirtualControllerService.cs" />
-    <Compile Include="Input\VirtualControllerService.cs" />
-    <Compile Include="Input\VirtualGameControllerFactory.cs" />
+    <Compile Include="Input\IControllerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage\IStorageService.cs" />
     <Compile Include="Storage\XnaStorageService.cs" />
