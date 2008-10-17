@@ -1,10 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 
 namespace ThraeX.Input
 {
     public class GameInputMapper
     {
+        private Dictionary<String, Keys> keyboardActionAssignments;
+
+        public GameInputMapper()
+        {
+            keyboardActionAssignments = new Dictionary<String, Keys>();
+        }
+
+        public void SetKeyForAction(String actionName, Keys keyboardKey)
+        {
+            if (keyboardActionAssignments.ContainsKey(actionName))
+                keyboardActionAssignments[actionName] = keyboardKey;
+            else
+                keyboardActionAssignments.Add(actionName, keyboardKey);
+        }
+
+        public Keys GetKeyForAction(String actionName)
+        {
+            if (keyboardActionAssignments.ContainsKey(actionName))
+                return keyboardActionAssignments[actionName];
+
+            return Keys.None;
+        }
+
         #region Menu UI Actions
         public bool GameStart
         {
