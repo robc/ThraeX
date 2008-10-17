@@ -67,6 +67,7 @@
     <Compile Include="Input\GameControllers\KeyboardOnlyVirtualGameController.cs" />
     <Compile Include="Input\GameControllers\NullGameController.cs" />
     <Compile Include="Input\GameControllerUpdateComponent.cs" />
+    <Compile Include="Input\GameInputMapper.cs" />
     <Compile Include="Input\IVirtualGameControllerFactory.cs" />
     <Compile Include="Input\IVirtualControllerService.cs" />
     <Compile Include="Input\VirtualControllerService.cs" />
