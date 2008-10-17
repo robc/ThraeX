@@ -13,7 +13,7 @@ namespace ThraeX.Input
 
         private Type controllerTypeClass;
         private GameInputMapper[] mappedControllers;
-        private int activeGameInputMapperNumber;
+        private int activeGameInputMapperNumber = NO_ACTIVE_GAME_INPUT_MAPPER;
 
         public GameControllerUpdateComponent(Game game, Type controllerType) : base(game)
         {
@@ -77,7 +77,6 @@ namespace ThraeX.Input
                 }
             }
 
-            activeGameInputMapperNumber = NO_ACTIVE_GAME_INPUT_MAPPER;
             return false;
         }
         #endregion
