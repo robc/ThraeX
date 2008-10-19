@@ -59,7 +59,6 @@
     <XnaCompressContent>true</XnaCompressContent>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Input\GameControllers\KeyboardAssignment.cs" />
     <Compile Include="Input\GameControllerUpdateComponent.cs" />
     <Compile Include="Input\GameInputMapper.cs" />
     <Compile Include="Input\IControllerService.cs" />
