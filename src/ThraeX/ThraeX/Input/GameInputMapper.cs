@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace ThraeX.Input
@@ -8,9 +9,10 @@ namespace ThraeX.Input
     {
         private Dictionary<String, Keys> keyboardActionAssignments;
 
-        public GameInputMapper()
+        public GameInputMapper(PlayerIndex playerIndex)
         {
             keyboardActionAssignments = new Dictionary<String, Keys>();
+            PlayerIndex = playerIndex;
         }
 
         public void SetKeyForAction(String actionName, Keys keyboardKey)
@@ -107,6 +109,18 @@ namespace ThraeX.Input
         }
         #endregion
 
+        #region Rumble Actions
+        public void KillRumble()
+        {
+            SetRumble(0f, 0f);
+        }
+
+        protected void SetRumble(float leftMotor, float rightMotor)
+        {
+            GamePad.SetVibration(PlayerIndex, leftMotor, rightMotor);
+        }
+        #endregion
+
         #region Keyboard, Gamepad Properties
         protected KeyboardState CurrentKeyboardState
         {
@@ -126,6 +140,11 @@ namespace ThraeX.Input
         protected GamePadState PreviousGamePadState
         {
             get; private set;
+        }
+
+        private PlayerIndex PlayerIndex
+        {
+            get; set;
         }
         #endregion
 
@@ -186,6 +205,16 @@ namespace ThraeX.Input
         protected bool IsButtonReleased(Buttons button)
         {
             return CurrentGamePadState.IsButtonUp(button) && PreviousGamePadState.IsButtonDown(button);
+        }
+        #endregion
+
+        #region Status Tests
+        public bool IsConnected
+        {
+            get
+            {
+        	    return CurrentGamePadState.IsConnected;
+            }
         }
         #endregion
     }

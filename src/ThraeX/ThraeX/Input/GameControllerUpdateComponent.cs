@@ -30,7 +30,7 @@ namespace ThraeX.Input
         {
             mappedControllers = new GameInputMapper[MAX_NUMBER_OF_CONTROLLERS];
             for (int i = 0; i < (MAX_NUMBER_OF_CONTROLLERS); i++)
-                mappedControllers[i] = (GameInputMapper)Activator.CreateInstance(controllerTypeClass);
+                mappedControllers[i] = (GameInputMapper)Activator.CreateInstance(controllerTypeClass, new Object[] { (PlayerIndex)i });
 
             base.Initialize();
         }
