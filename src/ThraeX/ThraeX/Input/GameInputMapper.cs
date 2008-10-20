@@ -95,6 +95,7 @@ namespace ThraeX.Input
             get
             {
             	return IsButtonReleased(Buttons.B)
+                    || IsButtonReleased(Buttons.Back)
                     || IsKeyReleased(Keys.Escape);
             }
         }
