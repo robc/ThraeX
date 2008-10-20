@@ -7,12 +7,18 @@ namespace ThraeX.Input
 {
     public class GameInputMapper
     {
+        public const String MENU_ITEM_ACCEPT_ACTION = "MenuAccept";
+        public const String MENU_ITEM_CANCEL_ACTION = "MenuCancel";
+
         private Dictionary<String, Keys> keyboardActionAssignments;
 
         public GameInputMapper(PlayerIndex playerIndex)
         {
-            keyboardActionAssignments = new Dictionary<String, Keys>();
             PlayerIndex = playerIndex;
+            
+            keyboardActionAssignments = new Dictionary<String, Keys>();
+            keyboardActionAssignments.Add(MENU_ITEM_ACCEPT_ACTION, Keys.None);
+            keyboardActionAssignments.Add(MENU_ITEM_CANCEL_ACTION, Keys.None);
         }
 
         public void SetKeyForAction(String actionName, Keys keyboardKey)
@@ -86,6 +92,7 @@ namespace ThraeX.Input
             get
             {
                 return IsButtonReleased(Buttons.A)
+                    || IsKeyReleased(GetKeyForAction(MENU_ITEM_ACCEPT_ACTION))
                     || IsKeyReleased(Keys.Enter);
             }
         }
@@ -96,6 +103,7 @@ namespace ThraeX.Input
             {
             	return IsButtonReleased(Buttons.B)
                     || IsButtonReleased(Buttons.Back)
+                    || IsKeyReleased(GetKeyForAction(MENU_ITEM_CANCEL_ACTION))
                     || IsKeyReleased(Keys.Escape);
             }
         }
