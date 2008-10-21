@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace ThraeX.Platform
 {
-    class DefaultTrialService : ITrialService
+    public class DefaultTrialService : ITrialService
     {
         #region ITrialService Members
         public bool IsTrialMode
