@@ -151,9 +151,9 @@ namespace ThraeX.Input
             get; private set;
         }
 
-        private PlayerIndex PlayerIndex
+        public PlayerIndex PlayerIndex
         {
-            get; set;
+            get; private set;
         }
         #endregion
 

@@ -34,7 +34,7 @@ namespace UnitTests.ThraeX.Input
         #endregion
 
         #region Constructor (sets up test data)
-        public GameInputMapperTest()
+        public GameInputMapperTest() : base(PlayerIndex.One)
         {
             previousKeyboardState = new KeyboardState(previousKeysList);
             currentKeyboardState = new KeyboardState(currentKeysList);
