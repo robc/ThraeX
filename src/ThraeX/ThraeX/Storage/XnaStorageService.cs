@@ -61,8 +61,7 @@ namespace ThraeX.Storage
 
         public void EndStorageOperation()
         {
-            if (storageContainer == null)
-                throw new InvalidOperationException("Unable to close a null storageContainer");
+            if (storageContainer == null) return;
 
             if (!storageContainer.IsDisposed)
             {
