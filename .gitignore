@@ -1,6 +1,7 @@
 *.suo
 *.xnb
 *.user
+desktop.ini
 src/ThraeX/ThraeX/bin/**
 src/ThraeX/ThraeX/obj/**
 src/ThraeX/ThraeX/Content/bin/**
@@ -9,3 +10,4 @@ src/ThraeX/UnitTests/bin/**
 src/ThraeX/UnitTests/obj/**
 src/ThraeX/ThraeX.4.1.resharper.user
 src/ThraeX/_ReSharper.ThraeX/**
+src/ThraeX/ThraeXDXCore.Solution/**

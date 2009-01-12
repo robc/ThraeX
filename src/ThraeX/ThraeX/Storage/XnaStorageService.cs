@@ -99,7 +99,11 @@ namespace ThraeX.Storage
         private void SelectDefaultUserStorageDevice(IAsyncResult result)
         {
             storageDevice = Guide.EndShowStorageDeviceSelector(result);
-            if (storageDevice == null || !storageDevice.IsConnected) storageRequestState = StorageRequestState.REQUEST_CANCELLED;
+
+            if (storageDevice == null || !storageDevice.IsConnected)
+                storageRequestState = StorageRequestState.REQUEST_CANCELLED;
+            else
+                storageRequestState = StorageRequestState.REQUEST_COMPLETE;
         }
         #endregion
     }
