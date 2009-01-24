@@ -15,6 +15,11 @@ namespace ThraeX.Platform
         {
             ;
         }
+
+        public bool CanPurchaseFullVersion(PlayerIndex player)
+        {
+            return true;
+        }
         #endregion
     }
 }

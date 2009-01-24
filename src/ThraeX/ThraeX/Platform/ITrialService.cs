@@ -7,5 +7,6 @@ namespace ThraeX.Platform
     {
         bool IsTrialMode { get; }
         void ShowMarketplace(PlayerIndex player);
+        bool CanPurchaseFullVersion(PlayerIndex player);
     }
 }
