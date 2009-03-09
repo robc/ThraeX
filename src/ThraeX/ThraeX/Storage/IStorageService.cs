@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Microsoft.Xna.Framework.Storage;
 
 namespace ThraeX.Storage
 {
@@ -10,13 +11,16 @@ namespace ThraeX.Storage
 
     public interface IStorageService
     {
+        bool Enabled { get; }                       // Do we wish to use the StorageService
         StorageRequestState RequestStatus { get; }
-        bool StorageAvailable { get; }
-        void SubmitStorageRequest();
-        void ResetStorageRequest();
 
-        FileStream GetFileStreamForStorageOperation(String filename, FileMode fileMode);
-        void EndStorageOperation();
-        bool IsFilePresentInStorage(String filename);
+        #region Functions related to accessing the StorageDevice used for "Title" Storage
+        StorageDevice TitleStorage { get; }
+        void MountTitleStorage();
+        void UnmountTitleStorage();
+        bool TitleStorageSelected { get; }
+        bool TitleStorageConnected { get; }
+        StorageContainer OpenStorageContainerForTitleStorage();
+        #endregion
     }
 }

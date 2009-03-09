@@ -7,102 +7,109 @@ namespace ThraeX.Storage
 {
     public class XnaStorageService : IStorageService
     {
-        // When running on the Xbox, this flag is set to the value of the Guide.IsVisible property.
-        // On the PC, we are not going to use the Guide, so this will simulate it always being set.
-        // ReSharper disable ConvertToConstant
-        private bool guideIsVisible = false;
-        // ReSharper restore ConvertToConstant
-        
-        private readonly String title;
-        private StorageDevice storageDevice;
-        private StorageContainer storageContainer;
-        private StorageRequestState storageRequestState;
-
-        public XnaStorageService(String title)
+        public XnaStorageService(String containerName)
         {
-            this.title = title;
-            storageRequestState = StorageRequestState.NO_REQUEST;
+            Enabled = true;
+            ContainerName = containerName;
+            RequestStatus = StorageRequestState.NO_REQUEST;
         }
 
-        #region IStorageService Members
+        public bool Enabled
+        {
+            get; private set;
+        }
+
+        private String ContainerName
+        {
+            get; set;
+        }
+
+        private bool GuideVisible
+        {
+        #if XBOX
+            get { return Guide.IsVisible; }
+        #else
+            get { return false; }
+        #endif
+        }
+
         public StorageRequestState RequestStatus
         {
-            get { return storageRequestState; }
+            get; private set;
         }
 
-        public bool StorageAvailable
+        public StorageDevice TitleStorage
         {
-            get { return (storageDevice != null && storageDevice.IsConnected); }
+            get; private set;
         }
 
-        public void SubmitStorageRequest()
+        public bool TitleStorageSelected
         {
-            #if XBOX
-            guideIsVisible = Guide.IsVisible;
-            #endif
-
-            if (storageRequestState == StorageRequestState.NO_REQUEST && storageDevice == null && !guideIsVisible)
-                StartStorageRequestAction();
-            else if (storageRequestState == StorageRequestState.WAITING_FOR_STORAGE_DEVICE_SELECTION)
-                throw new InvalidOperationException("Cannot Submit a Storage Device request when we have a request pending.");
+            get { return TitleStorage != null; }
         }
 
-        public void ResetStorageRequest()
+        public bool TitleStorageConnected
         {
-            storageRequestState = StorageRequestState.NO_REQUEST;
+            get { return TitleStorageSelected && TitleStorage.IsConnected; }
         }
 
-        public FileStream GetFileStreamForStorageOperation(string filename, FileMode fileMode)
+        public void MountTitleStorage()
         {
-            storageContainer = storageDevice.OpenContainer(title);
-            String filePath = Path.Combine(storageContainer.Path, filename);
-            return new FileStream(filePath, fileMode);
+            if (TitleStorage != null) UnmountTitleStorage();
+
+            if (!TitleStorageSelected && !GuideVisible && RequestStatus == StorageRequestState.NO_REQUEST)
+                StartTitleStorageDeviceRequest();
         }
 
-        public void EndStorageOperation()
+        public void UnmountTitleStorage()
         {
-            if (storageContainer == null) return;
+            if (StorageContainerForTitleStorageIsActive)
+                StorageContainerForTitleStorage.Dispose();
 
-            if (!storageContainer.IsDisposed)
-            {
-                storageContainer.Dispose();
-                storageContainer = null;
-            }
+            TitleStorage = null;
         }
 
-        public bool IsFilePresentInStorage(String filename)
+        private StorageContainer StorageContainerForTitleStorage
         {
-            if (!StorageAvailable)
-                throw new InvalidOperationException("Cannot check for presence of a file when no StorageDevice has been selected");
-
-            if (storageContainer == null)
-                storageContainer = storageDevice.OpenContainer(title);
-
-            String filePath = Path.Combine(storageContainer.Path, filename);
-            bool result =  File.Exists(filePath);
-
-            EndStorageOperation();
-            return result;
+            get; set;
         }
-        #endregion
+
+        private bool StorageContainerForTitleStorageIsActive
+        {
+            get { return (StorageContainerForTitleStorage != null && !StorageContainerForTitleStorage.IsDisposed); }
+        }
+
+        public StorageContainer OpenStorageContainerForTitleStorage()
+        {
+            if (!TitleStorageConnected)
+                throw new InvalidOperationException("Cannot Open a StorageContainer unless a StorageDevice has been mounted");
+
+            if (StorageContainerForTitleStorageIsActive)
+                throw new InvalidOperationException("Cannot Open a new StorageContainer if a StorageContainer is already open");
+
+            StorageContainerForTitleStorage = TitleStorage.OpenContainer(ContainerName);
+            return StorageContainerForTitleStorage;
+        }
 
         #region Private Actions
-        private void StartStorageRequestAction()
+        private void StartTitleStorageDeviceRequest()
         {
-            storageRequestState = StorageRequestState.WAITING_FOR_STORAGE_DEVICE_SELECTION;
-            storageDevice = null;
-            storageContainer = null;
-            Guide.BeginShowStorageDeviceSelector(new AsyncCallback(SelectDefaultUserStorageDevice), this);
+            RequestStatus = StorageRequestState.WAITING_FOR_STORAGE_DEVICE_SELECTION;
+            TitleStorage = null;
+            Guide.BeginShowStorageDeviceSelector(new AsyncCallback(HandleTitleStorageDeviceSelection), this);
         }
 
-        private void SelectDefaultUserStorageDevice(IAsyncResult result)
+        private void HandleTitleStorageDeviceSelection(IAsyncResult result)
         {
-            storageDevice = Guide.EndShowStorageDeviceSelector(result);
+            TitleStorage = Guide.EndShowStorageDeviceSelector(result);
 
-            if (storageDevice == null || !storageDevice.IsConnected)
-                storageRequestState = StorageRequestState.REQUEST_CANCELLED;
+            if (!TitleStorageConnected)
+            {
+                RequestStatus = StorageRequestState.REQUEST_CANCELLED;
+                Enabled = false;
+            }
             else
-                storageRequestState = StorageRequestState.REQUEST_COMPLETE;
+                RequestStatus = StorageRequestState.REQUEST_COMPLETE;
         }
         #endregion
     }
