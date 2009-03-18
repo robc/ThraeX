@@ -51,9 +51,9 @@ namespace ThraeX.Input
         {
             get
             {
-                return IsButtonReleased(Buttons.LeftThumbstickUp)
-                    || IsButtonReleased(Buttons.DPadUp)
-                    || IsKeyReleased(Keys.Up);
+                return IsButtonDown(Buttons.LeftThumbstickUp)
+                    || IsButtonDown(Buttons.DPadUp)
+                    || IsKeyDown(Keys.Up);
             }
         }
 
@@ -61,9 +61,9 @@ namespace ThraeX.Input
         {
             get
             {
-                return IsButtonReleased(Buttons.LeftThumbstickDown)
-                    || IsButtonReleased(Buttons.DPadDown)
-                    || IsKeyReleased(Keys.Down);
+                return IsButtonDown(Buttons.LeftThumbstickDown)
+                    || IsButtonDown(Buttons.DPadDown)
+                    || IsKeyDown(Keys.Down);
             }
         }
 
@@ -71,9 +71,9 @@ namespace ThraeX.Input
         {
             get
             {
-                return IsButtonReleased(Buttons.LeftThumbstickLeft)
-                    || IsButtonReleased(Buttons.DPadLeft)
-                    || IsKeyReleased(Keys.Left);
+                return IsButtonDown(Buttons.LeftThumbstickLeft)
+                    || IsButtonDown(Buttons.DPadLeft)
+                    || IsKeyDown(Keys.Left);
             }
         }
 
@@ -81,9 +81,9 @@ namespace ThraeX.Input
         {
             get
             {
-                return IsButtonReleased(Buttons.LeftThumbstickRight)
-                    || IsButtonReleased(Buttons.DPadRight)
-                    || IsKeyReleased(Keys.Right);
+                return IsButtonDown(Buttons.LeftThumbstickRight)
+                    || IsButtonDown(Buttons.DPadRight)
+                    || IsKeyDown(Keys.Right);
             }
         }
 
