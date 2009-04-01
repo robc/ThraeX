@@ -57,7 +57,7 @@ namespace ThraeX.Storage
         {
             if (TitleStorage != null) UnmountTitleStorage();
 
-            if (!TitleStorageSelected && !GuideVisible && RequestStatus == StorageRequestState.NO_REQUEST)
+            if (!TitleStorageSelected && !GuideVisible && (RequestStatus == StorageRequestState.NO_REQUEST || RequestStatus == StorageRequestState.REQUEST_COMPLETE))
                 StartTitleStorageDeviceRequest();
         }
 
