@@ -56,6 +56,26 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_GFW|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug_GFW\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;WINDOWS;ENABLE_LIVE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_GFW|x86' ">
+    <OutputPath>bin\x86\Release_GFW\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS;ENABLE_LIVE</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoStdLib>true</NoStdLib>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Xna.Framework, Version=3.0.0.0, Culture=neutral, PublicKeyToken=6d5c3888ef60e27d, processorArchitecture=x86">
       <Private>False</Private>
@@ -81,6 +101,7 @@
     <Compile Include="Input\GameControllerUpdateComponent.cs" />
     <Compile Include="Input\GameInputMapper.cs" />
     <Compile Include="Input\IControllerService.cs" />
+    <Compile Include="Platform\CommunityGamesTrialService.cs" />
     <Compile Include="Platform\DefaultTrialService.cs" />
     <Compile Include="Platform\ITrialService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
