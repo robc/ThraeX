@@ -30,7 +30,7 @@ namespace ThraeX.Platform
 
         public bool CanUseOnlineSessions(PlayerIndex player)
         {
-            return GetBoolGamerPrivilege(ALLOW_ONLINE_SESSIONS);
+            return GetBoolGamerPrivilege(player, ALLOW_ONLINE_SESSIONS);
         }
 
         public bool CanPurchaseContent(PlayerIndex player)
@@ -43,7 +43,7 @@ namespace ThraeX.Platform
             return GetBoolGamerPrivilege(player, ALLOW_TRADE_CONTENT);
         }
 
-        private bool GetBoolGamerPrivilege(PlayerIndex playerIndex, String privilegePropertyName)
+        private bool GetBoolGamerPrivilege(PlayerIndex player, String privilegePropertyName)
         {
             bool result = false;
             signedInGamers = Gamer.SignedInGamers;
@@ -53,7 +53,7 @@ namespace ThraeX.Platform
             {
                 if (gamer.PlayerIndex == player)
                 {
-                    result = selectedPrivilege.GetValue(gamer.Privileges, null);
+                    result = (bool)selectedPrivilege.GetValue(gamer.Privileges, null);
                     break;
                 }
             }
