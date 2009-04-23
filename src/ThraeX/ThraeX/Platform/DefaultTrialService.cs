@@ -16,39 +16,19 @@ namespace ThraeX.Platform
             ;
         }
 
-        public bool CanPurchaseFullVersion(PlayerIndex player)
-        {
-            return true;
-        }
-
         public bool CanUseOnlineSessions(PlayerIndex player)
         {
-            return true;
-        }
-
-        public bool CanUseCommunication(PlayerIndex player)
-        {
-            return true;
-        }
-
-        public bool CanViewProfiles(PlayerIndex player)
-        {
-            return true;
+            return false;
         }
 
         public bool CanPurchaseContent(PlayerIndex player)
         {
-            return true;
+            return false;
         }
 
         public bool CanTradeContent(PlayerIndex player)
         {
-            return true;
-        }
-
-        public bool CanUseUserContent(PlayerIndex player)
-        {
-            return true;
+            return false;
         }
         #endregion
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.GamerServices;
 
@@ -6,6 +7,15 @@ namespace ThraeX.Platform
 {
     public class CommunityGamesTrialService : ITrialService
     {
+        #region Strings used for method identification on the GamerPrivileges object
+        public static readonly String ALLOW_ONLINE_SESSIONS = "AllowOnlineSessions";
+        //public static readonly String ALLOW_COMMUNICATION = "AllowCommunication";
+        //public static readonly String ALLOW_PROFILE_VIEWING = "AllowProfileViewing";
+        public static readonly String ALLOW_PURCHASE_CONTENT = "AllowPurchaseContent";
+        public static readonly String ALLOW_TRADE_CONTENT = "AllowTradeContent";
+        //public static readonly String ALLOW_USER_CREATED_CONTENT = "AllowUserCreatedContent";
+        #endregion
+
         SignedInGamerCollection signedInGamers;
 
         public bool IsTrialMode
@@ -18,123 +28,37 @@ namespace ThraeX.Platform
             Guide.ShowMarketplace(player);
         }
 
-        public bool CanPurchaseFullVersion(PlayerIndex player)
-        {
-            signedInGamers = Gamer.SignedInGamers;
-            bool canPurchase = false;
-            
-            foreach (SignedInGamer gamer in signedInGamers)
-            {
-                if (gamer.PlayerIndex == player && gamer.Privileges.AllowPurchaseContent)
-                {
-                    canPurchase = true;
-                    break;
-                }
-            }
-
-            return canPurchase;
-        }
-
         public bool CanUseOnlineSessions(PlayerIndex player)
         {
-            signedInGamers = Gamer.SignedInGamers;
-            bool canUseOnlineSessions = false;
-
-            foreach (SignedInGamer gamer in signedInGamers)
-            {
-                if (gamer.PlayerIndex == player && gamer.Privileges.AllowOnlineSessions)
-                {
-                    canUseOnlineSessions = true;
-                    break;
-                }
-            }
-
-            return canUseOnlineSessions;
-        }
-
-        public bool CanUseCommunication(PlayerIndex player)
-        {
-            signedInGamers = Gamer.SignedInGamers;
-            bool canUseCommunication = false;
-
-            foreach (SignedInGamer gamer in signedInGamers)
-            {
-                if (gamer.PlayerIndex == player && gamer.Privileges.AllowCommunication)
-                {
-                    canUseCommunication = true;
-                    break;
-                }
-            }
-
-            return canUseCommunication;
-        }
-
-        public bool CanViewProfiles(PlayerIndex player)
-        {
-            signedInGamers = Gamer.SignedInGamers;
-            bool canViewProfiles = false;
-
-            foreach (SignedInGamer gamer in signedInGamers)
-            {
-                if (gamer.PlayerIndex == player && gamer.Privileges.AllowProfileViewing)
-                {
-                    canViewProfiles = true;
-                    break;
-                }
-            }
-
-            return canViewProfiles;
+            return GetBoolGamerPrivilege(ALLOW_ONLINE_SESSIONS);
         }
 
         public bool CanPurchaseContent(PlayerIndex player)
         {
-            signedInGamers = Gamer.SignedInGamers;
-            bool canPurchaseContent = false;
-
-            foreach (SignedInGamer gamer in signedInGamers)
-            {
-                if (gamer.PlayerIndex == player && gamer.Privileges.AllowPurchaseContent)
-                {
-                    canPurchaseContent = true;
-                    break;
-                }
-            }
-
-            return canPurchaseContent;
+            return GetBoolGamerPrivilege(player, ALLOW_PURCHASE_CONTENT);
         }
 
         public bool CanTradeContent(PlayerIndex player)
         {
-            signedInGamers = Gamer.SignedInGamers;
-            bool canTradeContent = false;
-
-            foreach (SignedInGamer gamer in signedInGamers)
-            {
-                if (gamer.PlayerIndex == player && gamer.Privileges.AllowTradeContent)
-                {
-                    canTradeContent = true;
-                    break;
-                }
-            }
-
-            return canTradeContent;
+            return GetBoolGamerPrivilege(player, ALLOW_TRADE_CONTENT);
         }
 
-        public bool CanUseUserContent(PlayerIndex player)
+        private bool GetBoolGamerPrivilege(PlayerIndex playerIndex, String privilegePropertyName)
         {
+            bool result = false;
             signedInGamers = Gamer.SignedInGamers;
-            bool canUseUserContent = false;
+            PropertyInfo selectedPrivilege = typeof(GamerPrivileges).GetProperty(privilegePropertyName, typeof(bool));
 
             foreach (SignedInGamer gamer in signedInGamers)
             {
-                if (gamer.PlayerIndex == player && gamer.Privileges.AllowUserCreatedContent)
+                if (gamer.PlayerIndex == player)
                 {
-                    canUseUserContent = true;
+                    result = selectedPrivilege.GetValue(gamer.Privileges, null);
                     break;
                 }
             }
 
-            return canUseUserContent;
+            return result;
         }
     }
 }

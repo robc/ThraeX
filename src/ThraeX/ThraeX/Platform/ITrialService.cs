@@ -9,12 +9,8 @@ namespace ThraeX.Platform
 
         void ShowMarketplace(PlayerIndex player);
         
-        bool CanPurchaseFullVersion(PlayerIndex player);
         bool CanUseOnlineSessions(PlayerIndex player);
-        bool CanUseCommunication(PlayerIndex player);
-        bool CanViewProfiles(PlayerIndex player);
         bool CanPurchaseContent(PlayerIndex player);
         bool CanTradeContent(PlayerIndex player);
-        bool CanUseUserContent(PlayerIndex player);
     }
 }
