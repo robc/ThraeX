@@ -122,6 +122,7 @@ namespace ThraeX.Input
         public void KillRumble()
         {
             SetRumble(0f, 0f);
+            EnableTimedRumble = false;
         }
 
         protected void SetRumble(float leftMotor, float rightMotor)
