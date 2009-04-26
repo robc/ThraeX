@@ -158,15 +158,15 @@ namespace ThraeX.Input
 
         public bool EnableTimedRumble
         {
-            get; private set;
+            get; protected set;
         }
 
-        private TimeSpan RumbleTime
+        protected TimeSpan RumbleTime
         {
             get; set;
         }
 
-        private float RumbleStrength
+        protected float RumbleStrength
         {
             get; set;
         }
