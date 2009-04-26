@@ -52,6 +52,9 @@ namespace ThraeX.Input
 
                 mappedControllers[i].UpdateKeyboardState(ref keyboardState);
                 mappedControllers[i].UpdateGamePadState(ref gamePadState);
+
+                if (mappedControllers[i].EnableTimedRumble)
+                    mappedControllers[i].UpdateRumbleStatus(gameTime);
             }
 
             base.Update(gameTime);

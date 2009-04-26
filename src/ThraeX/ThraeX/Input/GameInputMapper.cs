@@ -155,6 +155,21 @@ namespace ThraeX.Input
         {
             get; private set;
         }
+
+        public bool EnableTimedRumble
+        {
+            get; private set;
+        }
+
+        private TimeSpan RumbleTime
+        {
+            get; set;
+        }
+
+        private float RumbleStrength
+        {
+            get; set;
+        }
         #endregion
 
         #region Update Keyboard/GamePad status
@@ -168,6 +183,18 @@ namespace ThraeX.Input
         {
             PreviousGamePadState = CurrentGamePadState;
             CurrentGamePadState = gamePadState;
+        }
+
+        public void UpdateRumbleStatus(GameTime gameTime)
+        {
+            RumbleTime -= gameTime.ElapsedGameTime;
+            if (RumbleTime <= TimeSpan.Zero)
+            {
+                EnableTimedRumble = false;
+                KillRumble();
+            }
+            else
+                SetRumble(RumbleStrength, RumbleStrength);
         }
         #endregion
 
