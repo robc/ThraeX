@@ -49,12 +49,7 @@ namespace ThraeX.Input
             for (int i = 0; i < MAX_NUMBER_OF_CONTROLLERS; i++)
             {
                 GamePadState gamePadState = GamePad.GetState((PlayerIndex)i);
-
-                mappedControllers[i].UpdateKeyboardState(ref keyboardState);
-                mappedControllers[i].UpdateGamePadState(ref gamePadState);
-
-                if (mappedControllers[i].EnableTimedRumble)
-                    mappedControllers[i].UpdateRumbleStatus(gameTime);
+                mappedControllers[i].Update(gameTime, ref keyboardState, ref gamePadState);
             }
 
             base.Update(gameTime);

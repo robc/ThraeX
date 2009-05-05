@@ -10,7 +10,13 @@ namespace ThraeX.Input
         public const String MENU_ITEM_ACCEPT_ACTION = "MenuAccept";
         public const String MENU_ITEM_CANCEL_ACTION = "MenuCancel";
 
+        public const String MENU_UP = "MenuUp";
+        public const String MENU_DOWN = "MenuDown";
+        public const String MENU_LEFT = "MenuLeft";
+        public const String MENU_RIGHT = "MenuRight";
+
         private Dictionary<String, Keys> keyboardActionAssignments;
+        private Dictionary<String, TimeSpan> menuDirectionInputTimes;
 
         public GameInputMapper(PlayerIndex playerIndex)
         {
@@ -19,6 +25,12 @@ namespace ThraeX.Input
             keyboardActionAssignments = new Dictionary<String, Keys>();
             keyboardActionAssignments.Add(MENU_ITEM_ACCEPT_ACTION, Keys.None);
             keyboardActionAssignments.Add(MENU_ITEM_CANCEL_ACTION, Keys.None);
+
+            menuDirectionInputTimes = new Dictionary<string, TimeSpan>();
+            menuDirectionInputTimes.Add(MENU_UP, TimeSpan.Zero);
+            menuDirectionInputTimes.Add(MENU_DOWN, TimeSpan.Zero);
+            menuDirectionInputTimes.Add(MENU_LEFT, TimeSpan.Zero);
+            menuDirectionInputTimes.Add(MENU_RIGHT, TimeSpan.Zero);
         }
 
         public void SetKeyForAction(String actionName, Keys keyboardKey)
@@ -46,45 +58,65 @@ namespace ThraeX.Input
                     || IsKeyReleased(Keys.Enter);
             }
         }
-        
-        public bool MenuUp
+
+        public bool MenuUpTap
         {
             get
             {
-                return IsButtonDown(Buttons.LeftThumbstickUp)
-                    || IsButtonDown(Buttons.DPadUp)
-                    || IsKeyDown(Keys.Up);
+                return IsButtonReleased(Buttons.DPadUp)
+                    || IsButtonReleased(Buttons.LeftThumbstickUp)
+                    || IsKeyReleased(Keys.Up);
             }
         }
 
-        public bool MenuDown
+        public TimeSpan MenuUpTime
+        {
+            get { return menuDirectionInputTimes[MENU_UP]; }
+        }
+
+        public bool MenuDownTap
         {
             get
             {
-                return IsButtonDown(Buttons.LeftThumbstickDown)
-                    || IsButtonDown(Buttons.DPadDown)
-                    || IsKeyDown(Keys.Down);
+                return IsButtonReleased(Buttons.DPadDown)
+                    || IsButtonReleased(Buttons.LeftThumbstickDown)
+                    || IsKeyReleased(Keys.Down);
             }
         }
 
-        public bool MenuLeft
+        public TimeSpan MenuDownTime
+        {
+            get { return menuDirectionInputTimes[MENU_DOWN]; }
+        }
+
+        public bool MenuLeftTap
         {
             get
             {
-                return IsButtonDown(Buttons.LeftThumbstickLeft)
-                    || IsButtonDown(Buttons.DPadLeft)
-                    || IsKeyDown(Keys.Left);
+                return IsButtonReleased(Buttons.DPadLeft)
+                    || IsButtonReleased(Buttons.LeftThumbstickLeft)
+                    || IsKeyReleased(Keys.Left);
             }
         }
 
-        public bool MenuRight
+        public TimeSpan MenuLeftTime
+        {
+            get { return menuDirectionInputTimes[MENU_LEFT]; }
+        }
+
+        public bool MenuRightTap
         {
             get
             {
-                return IsButtonDown(Buttons.LeftThumbstickRight)
-                    || IsButtonDown(Buttons.DPadRight)
-                    || IsKeyDown(Keys.Right);
+                return IsButtonReleased(Buttons.DPadRight)
+                    || IsButtonReleased(Buttons.LeftThumbstickRight)
+                    || IsKeyReleased(Keys.Right);
             }
+        }
+
+        public TimeSpan MenuRightTime
+        {
+            get { return menuDirectionInputTimes[MENU_RIGHT]; }
         }
 
         public bool MenuAccept
@@ -114,6 +146,48 @@ namespace ThraeX.Input
             {
                 return IsButtonReleased(Buttons.Start)
                     || IsKeyReleased(Keys.Escape);
+            }
+        }
+        #endregion
+
+        #region Private Menu Actions (Used for timed menu press testing)
+        private bool MenuUp
+        {
+            get
+            {
+                return IsButtonDown(Buttons.LeftThumbstickUp)
+                    || IsButtonDown(Buttons.DPadUp)
+                    || IsKeyDown(Keys.Up);
+            }
+        }
+
+        private bool MenuDown
+        {
+            get
+            {
+                return IsButtonDown(Buttons.LeftThumbstickDown)
+                    || IsButtonDown(Buttons.DPadDown)
+                    || IsKeyDown(Keys.Down);
+            }
+        }
+        
+        private bool MenuLeft
+        {
+            get
+            {
+                return IsButtonDown(Buttons.LeftThumbstickLeft)
+                    || IsButtonDown(Buttons.DPadLeft)
+                    || IsKeyDown(Keys.Left);
+            }
+        }
+        
+        private bool MenuRight
+        {
+            get
+            {
+                return IsButtonDown(Buttons.LeftThumbstickRight)
+                    || IsButtonDown(Buttons.DPadRight)
+                    || IsKeyDown(Keys.Right);
             }
         }
         #endregion
@@ -174,19 +248,38 @@ namespace ThraeX.Input
         #endregion
 
         #region Update Keyboard/GamePad status
-        public void UpdateKeyboardState(ref KeyboardState keyboardState)
+        public void Update(GameTime gameTime, ref KeyboardState keyboardState, ref GamePadState gamePadState)
+        {
+            UpdateKeyboardState(ref keyboardState);
+            UpdateGamePadState(ref gamePadState);
+
+            if (EnableTimedRumble)
+                UpdateRumbleStatus(gameTime);
+
+            UpdateMenuPresses(gameTime);
+        }
+
+        public void ResetMenuPresses()
+        {
+            menuDirectionInputTimes[MENU_UP] = TimeSpan.Zero;
+            menuDirectionInputTimes[MENU_DOWN] = TimeSpan.Zero;
+            menuDirectionInputTimes[MENU_LEFT] = TimeSpan.Zero;
+            menuDirectionInputTimes[MENU_RIGHT] = TimeSpan.Zero;
+        }
+
+        private void UpdateKeyboardState(ref KeyboardState keyboardState)
         {
             PreviousKeyboardState = CurrentKeyboardState;
             CurrentKeyboardState = keyboardState;
         }
 
-        public void UpdateGamePadState(ref GamePadState gamePadState)
+        private void UpdateGamePadState(ref GamePadState gamePadState)
         {
             PreviousGamePadState = CurrentGamePadState;
             CurrentGamePadState = gamePadState;
         }
 
-        public void UpdateRumbleStatus(GameTime gameTime)
+        private void UpdateRumbleStatus(GameTime gameTime)
         {
             RumbleTime -= gameTime.ElapsedGameTime;
             if (RumbleTime <= TimeSpan.Zero)
@@ -196,6 +289,29 @@ namespace ThraeX.Input
             }
             else
                 SetRumble(RumbleStrength, RumbleStrength);
+        }
+
+        private void UpdateMenuPresses(GameTime gameTime)
+        {
+            if (MenuUp)
+                menuDirectionInputTimes[MENU_UP] += gameTime.ElapsedGameTime;
+            else
+                menuDirectionInputTimes[MENU_UP] = TimeSpan.Zero;
+
+            if (MenuDown)
+                menuDirectionInputTimes[MENU_DOWN] += gameTime.ElapsedGameTime;
+            else
+                menuDirectionInputTimes[MENU_DOWN] = TimeSpan.Zero;
+
+            if (MenuLeft)
+                menuDirectionInputTimes[MENU_LEFT] += gameTime.ElapsedGameTime;
+            else
+                menuDirectionInputTimes[MENU_LEFT] = TimeSpan.Zero;
+
+            if (MenuRight)
+                menuDirectionInputTimes[MENU_RIGHT] += gameTime.ElapsedGameTime;
+            else
+                menuDirectionInputTimes[MENU_RIGHT] = TimeSpan.Zero;
         }
         #endregion
 
