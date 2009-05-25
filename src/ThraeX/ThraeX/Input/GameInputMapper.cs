@@ -195,13 +195,20 @@ namespace ThraeX.Input
         #region Rumble Actions
         public void KillRumble()
         {
-            SetRumble(0f, 0f);
+            SetRumble(0f);
             EnableTimedRumble = false;
+        }
+
+        protected void SetRumble(float bothMotors)
+        {
+            LeftMotorRumble = bothMotors;
+            RightMotorRumble = bothMotors;
         }
 
         protected void SetRumble(float leftMotor, float rightMotor)
         {
-            GamePad.SetVibration(PlayerIndex, leftMotor, rightMotor);
+            LeftMotorRumble = leftMotor;
+            RightMotorRumble = rightMotor;
         }
         #endregion
 
@@ -245,6 +252,16 @@ namespace ThraeX.Input
         {
             get; set;
         }
+
+        protected float LeftMotorRumble
+        {
+            get; set;
+        }
+
+        protected float RightMotorRumble
+        {
+            get; set;
+        }
         #endregion
 
         #region Update Keyboard/GamePad status
@@ -257,6 +274,7 @@ namespace ThraeX.Input
                 UpdateRumbleStatus(gameTime);
 
             UpdateMenuPresses(gameTime);
+            ApplyRumble();
         }
 
         public void ResetMenuPresses()
@@ -288,7 +306,7 @@ namespace ThraeX.Input
                 KillRumble();
             }
             else
-                SetRumble(RumbleStrength, RumbleStrength);
+                SetRumble(RumbleStrength);
         }
 
         private void UpdateMenuPresses(GameTime gameTime)
@@ -312,6 +330,11 @@ namespace ThraeX.Input
                 menuDirectionInputTimes[MENU_RIGHT] += gameTime.ElapsedGameTime;
             else
                 menuDirectionInputTimes[MENU_RIGHT] = TimeSpan.Zero;
+        }
+
+        private void ApplyRumble()
+        {
+            GamePad.SetVibration(PlayerIndex, LeftMotorRumble, RightMotorRumble);
         }
         #endregion
 
